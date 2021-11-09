@@ -15,7 +15,7 @@ Design an intelligent agent that simulates a Miner  on a rectangular grid of nxn
 [Google Docs](https://docs.google.com/document/d/1HLkHgQ9nEfX6ynFTDeDMib9PuGglW2lm3i1k08VZS9Y/edit)
 
 ## Authors
-Deculawan, Ryan
-Griffin, Faith
-Tahimic, Kriz
-Uy, Samuel
+Deculawan, Ryan<br/>
+Griffin, Faith<br/>
+Tahimic, Kriz<br/>
+Uy, Samuel<br/>
