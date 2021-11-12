@@ -1,4 +1,3 @@
-package Model;
-public class Beacon {
-    
+package Model;public class Beacon {
+
 }
