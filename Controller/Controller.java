@@ -1,3 +1,2 @@
-public class controller {
-    
+class Controller {
 }
