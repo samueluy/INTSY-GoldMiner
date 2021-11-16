@@ -6,12 +6,6 @@ import Model.ModelMainMenu;
 
 import java.awt.*;
 import java.awt.Container;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-import java.awt.Container;
-import javax.swing.border.*;
-import java.awt.event.MouseListener;
 import java.awt.event.*;
 
 public class GUI{
@@ -31,6 +25,8 @@ public class GUI{
     protected static final Color MING = new Color(46, 109, 115);
     protected static final Color GOLD_SAND = new Color(229, 193, 126);
     protected static final Color PAARL = new Color(153, 89, 46);
+    protected static final Color CANNON_PINK = new Color(152, 71, 150);
+    protected static final Color SUNGLOW = new Color(255, 212, 40);
 
     private JFrame screen;
     private Container container;
@@ -38,7 +34,6 @@ public class GUI{
     private SoundSettings soundMenu;
     private JButton btnBackToMainMenu1;
     private JButton btnBackToMainMenu2;
-    private String strAboutGoldMiner = "";
     private AboutAI aboutMenu;
     private ChooseLevel chooseLevelMenu;
     private NumberOfCells numberOfCellsMenu;
@@ -56,16 +51,6 @@ public class GUI{
         initializeGUIParts(sample);
         showMainMenu();
 
-        //showSoundSettings();
-
-        //showAboutGoldMiner();
-
-        //chooseLevelMenu = new ChooseLevel();
-        //container.add(chooseLevelMenu);
-
-        //numberOfCellsMenu = new NumberOfCells();
-        //container.add(numberOfCellsMenu);
-        
         //startAISystem = new StartGoldMiner();
         //container.add(new ModernScrollPane(startAISystem));
 
@@ -95,6 +80,10 @@ public class GUI{
         soundMenu.getBtnDefaultTrack().addActionListener(listener);
         soundMenu.getBtnTrack1().addActionListener(listener);
         soundMenu.getBtnTrack2().addActionListener(listener);
+        numberOfCellsMenu.getTxtFldNumOfCells().addActionListener(listener);
+        numberOfCellsMenu.getBtnSubmit().addActionListener(listener);
+        chooseLevelMenu.getBtnRandom().addActionListener(listener);
+        chooseLevelMenu.getBtnIntelligent().addActionListener(listener);
     }
 
     public void setUpBackToMainMenuBtn(JButton btn){
@@ -104,6 +93,10 @@ public class GUI{
         btn.setUI(new StyledButtonUI(10,15,10,15));
         btn.setAlignmentX(Component.CENTER_ALIGNMENT);
     } 
+
+    public NumberOfCells getNumOfCellsMenu(){
+        return numberOfCellsMenu;
+    }
 
     public void showMainMenu(){
         container.add(mainMenu);
@@ -126,6 +119,38 @@ public class GUI{
         container.add(aboutMenu);
         mainMenu.setVisible(false);
         aboutMenu.setVisible(true);
+    }
+
+    public void showNumOfCellsMenu(){
+        container.add(numberOfCellsMenu);
+        mainMenu.setVisible(false);
+        numberOfCellsMenu.setVisible(true);
+    }
+
+    public void showChooseLevelMenu(){
+        container.add(chooseLevelMenu);
+        numberOfCellsMenu.setVisible(false);
+        chooseLevelMenu.setVisible(true);
+    }
+
+    public void showJOptionPane(ImageIcon icn, String message){
+        JPanel pnl = new JPanel();
+        pnl.setLayout(new FlowLayout());
+
+        JLabel lblImage = new JLabel(icn);
+        lblImage.setBackground(CANNON_PINK);
+        lblImage.setUI(new StyledLabelUI(5,10,5,10));
+        pnl.add(lblImage);
+
+        JLabel lbl = new JLabel(message);
+        lbl.setFont(new Font(Font.SANS_SERIF, Font.ITALIC, 15));
+        lbl.setBackground(CANNON_PINK);
+        lbl.setForeground(SUNGLOW);
+        lbl.setUI(new StyledLabelUI(15,20,15,20));
+        pnl.add(lbl);
+        pnl.setOpaque(false);
+        pnl.setVisible(true);
+        JOptionPane.showMessageDialog(container, pnl, "oOoOo MINER ALERT oOoOo", JOptionPane.DEFAULT_OPTION);
     }
 
     /*public static void main(String[] args){

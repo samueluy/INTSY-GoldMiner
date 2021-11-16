@@ -2,6 +2,8 @@ package Controller;
 
 import java.io.IOException;
 import javax.sound.sampled.*;
+import javax.swing.ImageIcon;
+
 import java.io.*;
 import java.awt.event.*;
 
@@ -14,6 +16,12 @@ public class Controller implements ActionListener{
     private Clip sound;
     private AudioInputStream audio;
     private FloatControl gainControl;
+
+    private int nCells;
+
+    private ImageIcon imgError = new ImageIcon("Lib/utilities/Error.png");
+    private ImageIcon imgCongrats = new ImageIcon("Lib/utilities/Congrats.png");
+    private ImageIcon imgLoser = new ImageIcon("Lib/utilities/Loser.png");
 
     public Controller(){
         modelMainMenu = new ModelMainMenu();
@@ -34,6 +42,16 @@ public class Controller implements ActionListener{
     */
     public void actionPerformed(ActionEvent e){
         if(e.getActionCommand().equals("Start AI System")){
+            //reset methods
+            gui.showNumOfCellsMenu();
+        }
+        if(e.getActionCommand().equals("Submit")){
+            getTotalCellNumber();
+        }
+        if(e.getActionCommand().equals("Random")){
+
+        }
+        if(e.getActionCommand().equals("Intelligent")){
             
         }
         if(e.getActionCommand().equals("About Gold Miner")){
@@ -133,5 +151,14 @@ public class Controller implements ActionListener{
         } catch (LineUnavailableException e1) {
             e1.printStackTrace();
         }
+    }
+
+    private void getTotalCellNumber(){
+        if(gui.getNumOfCellsMenu().getTxtFldNumOfCells().getText().matches("[0-9]+")){
+            nCells = Integer.parseInt(gui.getNumOfCellsMenu().getTxtFldNumOfCells().getText());
+            if(!(nCells >= 8 && nCells <= 69)) gui.showJOptionPane(imgError, "Oopsie! Invalid value submitted :((");
+            else gui.showChooseLevelMenu();
+        }
+        else gui.showJOptionPane(imgError, "Oopsie! Invalid value submitted :((");
     }
 }

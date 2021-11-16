@@ -20,18 +20,24 @@ public class NumberOfCells extends JPanel{
         setUpNumberOfCells();
     }
 
-    //getters
+    public JTextField getTxtFldNumOfCells(){
+        return txtfldNumberOfCells;
+    }
+
+    public JButton getBtnSubmit(){
+        return btnSubmit;
+    }
 
     private void setUpNumberOfCells(){
-        lblInstructions.setFont(new Font(Font.SANS_SERIF, Font.ITALIC, 50));
+        lblInstructions.setFont(new Font(Font.SANS_SERIF, Font.ITALIC, 40));
         lblInstructions.setBackground(GUI.PINE_GLADE);
         lblInstructions.setForeground(Color.white);
-        lblInstructions.setUI(new StyledLabelUI(55,50,55,50));
+        lblInstructions.setUI(new StyledLabelUI(25,20,25,20));
         lblInstructions.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.add(lblInstructions);
         this.add(Box.createRigidArea(new Dimension(0, 96)));
 
-        txtfldNumberOfCells.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
+        txtfldNumberOfCells.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
         txtfldNumberOfCells.setBackground(GUI.SPRING_LEAVES);
         txtfldNumberOfCells.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.add(txtfldNumberOfCells);
@@ -39,9 +45,9 @@ public class NumberOfCells extends JPanel{
 
         
         btnSubmit.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
-        btnSubmit.setBackground(GUI.MALIBU);
-        btnSubmit.setForeground(Color.white);
-        btnSubmit.setUI(new StyledButtonUI(20,100,20,100));
+        btnSubmit.setBackground(GUI.PINE_GLADE);
+        btnSubmit.setForeground(GUI.MING);
+        btnSubmit.setUI(new StyledButtonUI(10,15,10,15));
         btnSubmit.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.add(btnSubmit);
     }

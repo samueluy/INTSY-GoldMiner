@@ -28,13 +28,19 @@ public class ChooseLevel extends JPanel{
         setUpChooseLevelButtons();
     }
 
-    //getters
+    public JButton getBtnRandom(){
+        return btnRandom;
+    }
+
+    public JButton getBtnIntelligent(){
+        return btnIntelligent;
+    }
 
     private void setUpChooseLevelButtons(){
-        lblInstructions.setFont(new Font(Font.SANS_SERIF, Font.ITALIC, 20));
+        lblInstructions.setFont(new Font(Font.SANS_SERIF, Font.ITALIC, 30));
         lblInstructions.setBackground(GUI.PINE_GLADE);
         lblInstructions.setForeground(Color.white);
-        lblInstructions.setUI(new StyledLabelUI(25,20,25,20));
+        lblInstructions.setUI(new StyledLabelUI(50,45,50,45));
         lblInstructions.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.add(lblInstructions);
         this.add(Box.createRigidArea(new Dimension(0, 96)));
@@ -48,7 +54,7 @@ public class ChooseLevel extends JPanel{
         btn.setIcon(img);
         btn.setBackground(GUI.MALIBU);
         btn.setPreferredSize(new Dimension(288,288));
-        btn.setUI(new StyledButtonUI(95,100,95,100));
+        btn.setUI(new StyledButtonUI(100, 95, 100, 95));
         btn.setForeground(GUI.MALIBU);
         pnlChooseLevel.add(btn);
     }

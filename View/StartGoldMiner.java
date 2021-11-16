@@ -2,7 +2,6 @@ package View;
 
 import javax.swing.*;
 import java.awt.*;
-import javax.swing.border.*;
 
 public class StartGoldMiner extends JPanel{
     private GoldMinerProper systemProper;
