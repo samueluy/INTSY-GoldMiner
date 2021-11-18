@@ -38,6 +38,7 @@ public class GUI{
     private ChooseLevel chooseLevelMenu;
     private NumberOfCells numberOfCellsMenu;
     private StartGoldMiner startAISystem;
+    private Counters counterScreen;
 
     public GUI(ModelMainMenu sample){
         screen = new JFrame("Gold Miner");
@@ -67,7 +68,8 @@ public class GUI{
         soundMenu.add(btnBackToMainMenu2);
         chooseLevelMenu = new ChooseLevel();
         numberOfCellsMenu = new NumberOfCells();
-        //startAISystem = new StartGoldMiner(numberOfCells);
+        startAISystem = new StartGoldMiner(8); //maybe you can optimize dis
+        counterScreen = new Counters("Random"); //maybe you can optimize dis
     }
 
     public void setActionListeners(ActionListener listener){
@@ -84,6 +86,7 @@ public class GUI{
         numberOfCellsMenu.getBtnSubmit().addActionListener(listener);
         chooseLevelMenu.getBtnRandom().addActionListener(listener);
         chooseLevelMenu.getBtnIntelligent().addActionListener(listener);
+        counterScreen.getBtnStartMining().addActionListener(listener);
     }
 
     public void setUpBackToMainMenuBtn(JButton btn){
@@ -105,7 +108,7 @@ public class GUI{
         aboutMenu.setVisible(false);
         chooseLevelMenu.setVisible(false);
         numberOfCellsMenu.setVisible(false);
-        //startAISystem.setVisible(false);
+        startAISystem.setVisible(false);
         mainMenu.setVisible(true);
     }
 
@@ -131,6 +134,20 @@ public class GUI{
         container.add(chooseLevelMenu);
         numberOfCellsMenu.setVisible(false);
         chooseLevelMenu.setVisible(true);
+    }
+
+    public void showStartGoldMiner(int numberOfCells, String lvl){
+        startAISystem = null; //put in updatestartgoldminer() later
+        startAISystem = new StartGoldMiner(numberOfCells);
+        chooseLevelMenu.setVisible(false);
+        startAISystem.setVisible(true);
+        container.add(new ModernScrollPane(startAISystem));
+        //counterScreen = null; //put in updatestartgoldminer() later
+        counterScreen.updateLvl(lvl);
+    }
+
+    public void updateStartGoldMiner(){
+
     }
 
     public void showJOptionPane(ImageIcon icn, String message){

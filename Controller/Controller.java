@@ -20,7 +20,7 @@ public class Controller implements ActionListener{
     private int nCells;
 
     private ImageIcon imgError = new ImageIcon("Lib/utilities/Error.png");
-    private ImageIcon imgCongrats = new ImageIcon("Lib/utilities/Congrats.png");
+    private ImageIcon imgCongrats = new ImageIcon("Lib/utilities/Congratulations.png");
     private ImageIcon imgLoser = new ImageIcon("Lib/utilities/Loser.png");
 
     public Controller(){
@@ -49,10 +49,13 @@ public class Controller implements ActionListener{
             getTotalCellNumber();
         }
         if(e.getActionCommand().equals("Random")){
-
+            gui.showStartGoldMiner(nCells, "Random");
         }
         if(e.getActionCommand().equals("Intelligent")){
-            
+            gui.showStartGoldMiner(nCells, "Intelligent");
+        }
+        if(e.getActionCommand().equals("Start Mining")){
+            gui.showJOptionPane(imgCongrats, "Congratulations! You found the gold :))");
         }
         if(e.getActionCommand().equals("About Gold Miner")){
             gui.showAboutGoldMiner();

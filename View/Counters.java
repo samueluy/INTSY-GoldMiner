@@ -15,7 +15,7 @@ public class Counters{
         frame = new JFrame(lvl);
         frame.setSize(new Dimension(288, 480));
         frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setResizable(false);
         frame.getContentPane().setBackground(GUI.PICKLED_BLUEWOOD);
         lblScans = new JLabel("Scans: ");
@@ -23,10 +23,12 @@ public class Counters{
         lblRotates = new JLabel("Rotates: ");
         btnStart = new JButton("Start Mining");
         setUpCounters();
-        frame.setVisible(true);
+        frame.setVisible(false);
     }
 
-    //getter
+    public JButton getBtnStartMining(){
+        return btnStart;
+    }
 
     private void setUpCounters(){
         frame.add(Box.createRigidArea(new Dimension(0, 30)));
@@ -53,6 +55,10 @@ public class Counters{
         frame.add(Box.createRigidArea(new Dimension(0, 15)));
     }
 
+    public void updateLvl(String str){
+        frame.setTitle(str);
+        frame.setVisible(true);
+    }
     //update method
 
     /*public static void main(String[] args){
