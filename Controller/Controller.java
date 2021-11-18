@@ -156,6 +156,7 @@ public class Controller implements ActionListener{
         }
     }
 
+    //optimize dis later
     private void getTotalCellNumber(){
         if(gui.getNumOfCellsMenu().getTxtFldNumOfCells().getText().matches("[0-9]+")){
             nCells = Integer.parseInt(gui.getNumOfCellsMenu().getTxtFldNumOfCells().getText());
