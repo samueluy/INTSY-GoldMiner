@@ -164,4 +164,5 @@ public class Controller implements ActionListener{
         }
         else gui.showJOptionPane(imgError, "Oopsie! Invalid value submitted :((");
     }
+}
 
