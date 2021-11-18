@@ -5,14 +5,19 @@ import java.awt.geom.Point2D; // for distance formula
 
 
 public class Cell {
+    private int nWeight;
     private int nBeacon;
     private boolean bGold;
     private boolean bPit;
     private Miner mMiner;
 
+    public void setWeight(int weight){
+        this.nWeight=weight;
+    }
+
     public void setBeacon(Point pGoldCoordinates){
         this.nBeacon= (int) Point2D.distance(pGoldCoordinates.x, pGoldCoordinates.x,
-                      pGoldCoordinates.y, pGoldCoordinates.y);
+                pGoldCoordinates.y, pGoldCoordinates.y);
     }
 
     public void setGold(){
@@ -25,6 +30,10 @@ public class Cell {
 
     public void setMiner(){
         this.mMiner = new Miner();
+    }
+
+    public int getWeight(){
+        return nWeight;
     }
 
     public int isBeacon(){
@@ -56,6 +65,6 @@ public class Cell {
         this.nBeacon=-1;
         this.bGold=false;
         this.bPit=false;
-        //this.mMiner=null;
+        this.mMiner=null;
     }
 }
