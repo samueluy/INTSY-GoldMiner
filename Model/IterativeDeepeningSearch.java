@@ -26,10 +26,10 @@ public class IterativeDeepeningSearch {
             while (     !qFringe.isEmpty() 
                     ||  !bGoalFound)
             {
-                if (isGoalState(curr.))
-                {
+            //    if (isGoalState(curr.))
+           //     {
 
-                }
+              //  }
 
             }
     }

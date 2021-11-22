@@ -4,8 +4,33 @@ public class Miner {
     private String strDirection;
     private int nCount;
 
-    private void rotate(){}
-    private void move(){}
-    private void scan(){}
-    private void isValidMove(){}
+    public void rotate(){
+        switch(this.strDirection){
+            case "RIGHT":
+                this.strDirection = "DOWN";
+                break;
+            case "DOWN":
+                this.strDirection = "LEFT";
+                break;
+            case "LEFT":
+                this.strDirection = "UP";
+                break;
+            case "UP":
+                this.strDirection = "RIGHT";
+                break;
+        }
+    }
+    public void move(){}
+    public void scan(){}
+    public void isValidMove(){}
+
+    public String getDirection(){
+        return this.strDirection;
+    }
+
+    public Miner(){
+        this.strDirection = "RIGHT";
+    }
+
+
 }

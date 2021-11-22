@@ -9,8 +9,7 @@ public class Node {
     private Node nScan;
 
     public Node(Cell[][] arrCells){
-        this.data = arrCells;
-        is 
+    //    this.data = arrCells;
     }
 
     public Cell[][] move(Cell[][] arrCells){
@@ -18,7 +17,7 @@ public class Node {
         return data;
     }
 
-    public is valid 
+//    public is valid
 
 
 }

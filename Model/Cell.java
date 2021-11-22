@@ -31,7 +31,12 @@ public class Cell {
     public void setMiner(){
         this.mMiner = new Miner();
     }
-
+    public void setMiner(Miner miner){
+        this.mMiner = miner;
+    }
+    public void removeMiner(){
+        this.mMiner = null;
+    }
     public int getWeight(){
         return nWeight;
     }
@@ -52,6 +57,10 @@ public class Cell {
         if(this.mMiner!=null)
             return true;
         return false;
+    }
+
+    public Miner getMiner(){
+        return this.mMiner;
     }
 
     public boolean isFreeTerrain(){
