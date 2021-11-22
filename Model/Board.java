@@ -44,20 +44,23 @@ class Board
         int nUpperbound = MAX_DIMENSION;
         Point pCoordinate = new Point();
         
-        // Loop until valid place to place PIT
-        do
+        // Loop until the right count of pits is place in the board
+        for (int i=0; i< Math.round(MAX_DIMENSION * 0.25); i++)
         {
-            //generate random values from 0-24
-            pCoordinate.x = rRand.nextInt(nUpperbound); 
-            pCoordinate.y = rRand.nextInt(nUpperbound);
-            if (   arrCells[pCoordinate.x][pCoordinate.y].isFreeTerrain() 
-                &&  !arrCells[pCoordinate.x][pCoordinate.y].isMiner())  //If the miner is not in the cell
+            // Loop until valid place to place PIT
+            do
             {
-                arrCells[pCoordinate.x][pCoordinate.y].setPit();
-                bValid = true; // STOP the loop
-            }
-        }while(!bValid);
-        
+                //generate random values from 0-24
+                pCoordinate.x = rRand.nextInt(nUpperbound); 
+                pCoordinate.y = rRand.nextInt(nUpperbound);
+                if (   arrCells[pCoordinate.x][pCoordinate.y].isFreeTerrain() 
+                    &&  !arrCells[pCoordinate.x][pCoordinate.y].isMiner())  //If the miner is not in the cell
+                {
+                    arrCells[pCoordinate.x][pCoordinate.y].setPit();
+                    bValid = true; // STOP the loop
+                }
+            }while(!bValid);
+        }
     }
 
     /**
@@ -101,21 +104,25 @@ class Board
         int nUpperbound = MAX_DIMENSION;
         Point pCoordinate = new Point();
         
-        // Loop until valid coordinates to place BEACON
-        do
+        // Loop until the right count of BEACONS is place in the board
+        for (int i=0; i< Math.round(MAX_DIMENSION * 0.1); i++)
         {
-            //generate random values from 0-24
-            pCoordinate.x = rRand.nextInt(nUpperbound); 
-            pCoordinate.y = rRand.nextInt(nUpperbound);
-            if (   arrCells[pCoordinate.x][pCoordinate.y].isFreeTerrain() 
-                &&  !arrCells[pCoordinate.x][pCoordinate.y].isMiner())  //If the miner is not in the cell
+            // Loop until valid coordinates to place BEACON
+            do
             {
-                arrCells[pCoordinate.x][pCoordinate.y].setBeacon(pGoldCoordinate);
-                bValid = true; // STOP the loop
-            }
-        }while(!bValid);
+                //generate random values from 0-24
+                pCoordinate.x = rRand.nextInt(nUpperbound); 
+                pCoordinate.y = rRand.nextInt(nUpperbound);
+                if (   arrCells[pCoordinate.x][pCoordinate.y].isFreeTerrain() 
+                    &&  !arrCells[pCoordinate.x][pCoordinate.y].isMiner())  //If the miner is not in the cell
+                {
+                    arrCells[pCoordinate.x][pCoordinate.y].setBeacon(pGoldCoordinate);
+                    bValid = true; // STOP the loop
+                }
+            }while(!bValid);
+    
+        }
     }
-
     /**
      * Gets the MAX_DIMENSION of the board 
      * @return
