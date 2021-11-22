@@ -158,42 +158,7 @@ class Board
             switch(charAction)
             {
                 case 'M':
-                    Miner tempMiner = arrCells[pMinerCurrCoordinate.x][pMinerCurrCoordinate.y].getMiner();
-                    arrCells[pMinerCurrCoordinate.x][pMinerCurrCoordinate.y].removeMiner(); // Removes miner from intial cell
-                    switch(tempMiner.getDirection())
-                    {
-                        case "RIGHT":
-                            pMinerCurrCoordinate.x = getMinerCoordinate().x+1;
-                            break;
-                        case "LEFT":
-                            pMinerCurrCoordinate.x = getMinerCoordinate().x-1;
-                            break;
-                        case "UP":
-                            pMinerCurrCoordinate.y = getMinerCoordinate().y-1;
-                            break;
-                        case "DOWN":
-                            pMinerCurrCoordinate.y = getMinerCoordinate().y+1;
-                            break;
-                    }
-                    // Place new miner
-                    arrCells[pMinerCurrCoordinate.x][pMinerCurrCoordinate.y].setMiner(tempMiner);
-
-                    // Check if BEACON
-                    if (arrCells[pMinerCurrCoordinate.x][pMinerCurrCoordinate.y].isBeacon())
-                    {
-                        // Convert int to String
-                        strReturn = "M," + arrCells[pMinerCurrCoordinate.x][pMinerCurrCoordinate.y].getBeacon();
-                    }
-                    // Check if PIT
-                    else if (arrCells[pMinerCurrCoordinate.x][pMinerCurrCoordinate.y].isPit())
-                    {
-                        strReturn = "M,PIT";
-                    }
-                    // Check if GOLD
-                    else if (arrCells[pMinerCurrCoordinate.x][pMinerCurrCoordinate.y].isGold())
-                    {
-                        strReturn = "M,GOLD";
-                    }
+                    strReturn = move();
                     break;
                 case 'S':
                     strReturn = scan();
@@ -202,6 +167,56 @@ class Board
                     rotate();
                     break;
             }
+        }
+
+        return strReturn;
+    }
+
+    /**
+     * Moves the miner in front of the direction where miner is facing
+     * @return String:  M,<number> if moved in beacon Tile, 
+     *                  M,PIT if moved in pit tile, 
+     *                  M,GOLD if moved in gold tile, 
+     * 
+     *                  Otherwise, NULL
+     */
+    private String move()
+    {
+        String strReturn = new String();
+        Miner tempMiner = arrCells[pMinerCurrCoordinate.x][pMinerCurrCoordinate.y].getMiner();
+        arrCells[pMinerCurrCoordinate.x][pMinerCurrCoordinate.y].removeMiner(); // Removes miner from intial cell
+        switch(tempMiner.getDirection())
+        {
+            case "RIGHT":
+                pMinerCurrCoordinate.x = getMinerCoordinate().x+1;
+                break;
+            case "LEFT":
+                pMinerCurrCoordinate.x = getMinerCoordinate().x-1;
+                break;
+            case "UP":
+                pMinerCurrCoordinate.y = getMinerCoordinate().y-1;
+                break;
+            case "DOWN":
+                pMinerCurrCoordinate.y = getMinerCoordinate().y+1;
+                break;
+        }
+        // Place new miner
+        arrCells[pMinerCurrCoordinate.x][pMinerCurrCoordinate.y].setMiner(tempMiner);
+        // Check if BEACON
+        if (arrCells[pMinerCurrCoordinate.x][pMinerCurrCoordinate.y].isBeacon() != 0)
+        {
+            // Convert int to String
+            strReturn = "M," + arrCells[pMinerCurrCoordinate.x][pMinerCurrCoordinate.y].isBeacon();
+        }
+        // Check if PIT
+        else if (arrCells[pMinerCurrCoordinate.x][pMinerCurrCoordinate.y].isPit())
+        {
+            strReturn = "M,PIT";
+        }
+        // Check if GOLD
+        else if (arrCells[pMinerCurrCoordinate.x][pMinerCurrCoordinate.y].isGold())
+        {
+            strReturn = "M,GOLD";
         }
 
         return strReturn;
@@ -353,7 +368,7 @@ class Board
         return bValidAction;
     }
 
-    /**
+    /** 
      * Gets the coordinates of the cell where Miner is currently in
      * @return Point: Coordinates of the cell where Miner is currently in
      */
