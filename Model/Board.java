@@ -15,6 +15,11 @@ class Board
     {
         MAX_DIMENSION = nDimension;
         arrCells = new Cell[MAX_DIMENSION][MAX_DIMENSION];
+        for(int i=0; i<MAX_DIMENSION; i++){
+            for(int y=0; y<MAX_DIMENSION; y++){
+                arrCells[i][y] = new Cell();
+            }
+        }
         setMiner();
         setBeacon(setGold());
         setPit();
@@ -98,5 +103,12 @@ class Board
     public int getMAX_DIMENSION ()
     {
         return MAX_DIMENSION;
+    }
+
+    // To delete. For testing
+    public static void main(String[] args) {
+        Board board = new Board(8);
+        int max = board.getMAX_DIMENSION();
+        System.out.println(max);
     }
 }
