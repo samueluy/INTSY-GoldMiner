@@ -7,7 +7,7 @@ public class Board extends JPanel{
     private Point locTempLocation;
 
     public Board(int numberOfCells){
-        int dimension = numberOfCells * 48;
+        int dimension = numberOfCells * GUI.CELL_DIMENSION;
         this.setLayout(new GridLayout(numberOfCells, numberOfCells, 3, 3));
         this.setPreferredSize(new Dimension(dimension, dimension));
         this.setBackground(GUI.TALLOW);

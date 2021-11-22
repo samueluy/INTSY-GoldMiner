@@ -10,6 +10,7 @@ import java.awt.event.*;
 
 public class GUI{
     protected static final Dimension SYSTEM_SIZE = new Dimension(960, 960);//3120, 3120 //48x20
+    protected static final int CELL_DIMENSION = 48;
     protected static final Color TARAWERA = new Color(14, 65, 96);
     protected static final Color MALIBU = new Color(113,171,233);
     protected static final Color SPRING_LEAVES = new Color(85, 131, 104);
