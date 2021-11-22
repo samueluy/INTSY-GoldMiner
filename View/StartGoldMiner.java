@@ -5,7 +5,6 @@ import java.awt.*;
 
 public class StartGoldMiner extends JPanel{
     private GoldMinerProper systemProper;
-    //private NorthDisplay systemProperNorthDisplay;
 
     public StartGoldMiner(int numberOfCells){
         this.setSize(new Dimension(3120, 3120));
