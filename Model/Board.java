@@ -7,9 +7,9 @@ class Board
     private Cell[][] arrCells; // BOARD
     private static int MAX_DIMENSION = 8;
 
-    /**
+    /** Constructs the board class
      * 
-     * @param nDimension 
+     * @param nDimension int MAX dimension the coard will have
      */
     public Board (int nDimension)
     {
@@ -26,11 +26,17 @@ class Board
 
     }
 
+    /**
+     * Sets the location of the miner in the (0,0) coordinates
+     */
     private void setMiner ()
     {
         arrCells[0][0].setMiner();
     }
 
+    /**
+     * Set the pit location randomly
+     */
     private void setPit()
     {
         boolean bValid = false;
@@ -38,7 +44,7 @@ class Board
         int nUpperbound = MAX_DIMENSION;
         Point pCoordinate = new Point();
         
-        
+        // Loop until valid place to place PIT
         do
         {
             //generate random values from 0-24
@@ -54,6 +60,10 @@ class Board
         
     }
 
+    /**
+     * Set the Gold location randomly
+     * @return Point where the Gold location is located. Possible coordinate is from 0-MAX DIMENSION Col and Row
+     */
     private Point setGold()
     {
         boolean bValid = false;
@@ -61,7 +71,7 @@ class Board
         int nUpperbound = MAX_DIMENSION;
         Point pCoordinate = new Point();
         
-        
+        // Loop until valid coordinates to place GOLD
         do
         {
             //generate random values from 0-24
@@ -78,6 +88,12 @@ class Board
         return pCoordinate;
     }
 
+
+    /**
+     * Set the beacon randomly
+     * 
+     * @param pGoldCoordinate Point coordinates where the gold is placed
+     */
     private void setBeacon(Point pGoldCoordinate)
     {
         boolean bValid = false;
@@ -85,7 +101,7 @@ class Board
         int nUpperbound = MAX_DIMENSION;
         Point pCoordinate = new Point();
         
-        
+        // Loop until valid coordinates to place BEACON
         do
         {
             //generate random values from 0-24
@@ -100,15 +116,19 @@ class Board
         }while(!bValid);
     }
 
+    /**
+     * Gets the MAX_DIMENSION of the board 
+     * @return
+     */
     public int getMAX_DIMENSION ()
     {
         return MAX_DIMENSION;
     }
 
     // To delete. For testing
-    public static void main(String[] args) {
-        Board board = new Board(8);
-        int max = board.getMAX_DIMENSION();
-        System.out.println(max);
-    }
+    //public static void main(String[] args) {
+    //    Board board = new Board(8);
+    //    int max = board.getMAX_DIMENSION();
+    //    System.out.println(max);
+    //}
 }
