@@ -15,12 +15,38 @@ public class Game
     private void initBoard()
     {
         int i,j;
+        int Min = 0;
+        int Max = 7;
+        boolean exitFlag = false;
+        boolean flagG = false, flagB = false,flagD = false;
+
         for (i = 0;i< tempBoard.length;i++)
         {
             for(j = 0; j< tempBoard[0].length;j++)
                 tempBoard[i][j] = "*";
         }
         tempBoard[0][0] = "A";
+
+        while(!exitFlag)
+        {
+            i = Min + (int)(Math.random() * ((Max - Min) + 1));
+            j = Min + (int)(Math.random() * ((Max - Min) + 1));
+            if(tempBoard[i][j].contains("*") && !flagG) {
+                tempBoard[i][j] = "G";
+                flagG = true;
+            }
+            if(tempBoard[i][j].contains("*") && !flagB) {
+                tempBoard[i][j] = "B";
+                flagB = true;
+            }
+            ///Will modify this one soon.
+            if(tempBoard[i][j].contains("*") && !flagD) {
+                tempBoard[i][j] = "D";
+                flagD = true;
+            }
+            if(flagB && flagD && flagG)
+                exitFlag = true;
+        }
     }
 
     private void display()

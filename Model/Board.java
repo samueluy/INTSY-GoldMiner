@@ -6,11 +6,10 @@ class Board
 {
     private Cell[][] arrCells; // BOARD
     private static int MAX_DIMENSION = 8;
-    private static Point pMinerCurrCoordinate; //Miner Coordinate Tracker
 
-    /** Constructs the board class
-     * 
-     * @param nDimension int MAX dimension the coard will have
+    /**
+     *
+     * @param nDimension
      */
     public Board (int nDimension)
     {
@@ -27,354 +26,193 @@ class Board
 
     }
 
-    /**
-     * Sets the location of the miner in the (0,0) coordinates
-     */
     private void setMiner ()
     {
-        pMinerCurrCoordinate.x = 0;
-        pMinerCurrCoordinate.y = 0;
-        arrCells[pMinerCurrCoordinate.x][pMinerCurrCoordinate.y].setMiner();
+        arrCells[0][0].setMiner();
     }
 
-    /**
-     * Set the pit location randomly
-     */
     private void setPit()
     {
         boolean bValid = false;
         Random rRand = new Random(); //instance of random class
         int nUpperbound = MAX_DIMENSION;
         Point pCoordinate = new Point();
-        
-        // Loop until the right count of pits is place in the board
-        for (int i=0; i< Math.round(MAX_DIMENSION * 0.25); i++)
+
+        do
         {
-            // Loop until valid place to place PIT
-            do
-            {
-                //generate random values from 0-24
-                pCoordinate.x = rRand.nextInt(nUpperbound); 
-                pCoordinate.y = rRand.nextInt(nUpperbound);
-                if (   arrCells[pCoordinate.x][pCoordinate.y].isFreeTerrain() 
+            //generate random values from 0-24
+            pCoordinate.x = rRand.nextInt(nUpperbound);
+            pCoordinate.y = rRand.nextInt(nUpperbound);
+            if (   arrCells[pCoordinate.x][pCoordinate.y].isFreeTerrain()
                     &&  !arrCells[pCoordinate.x][pCoordinate.y].isMiner())  //If the miner is not in the cell
-                {
-                    arrCells[pCoordinate.x][pCoordinate.y].setPit();
-                    bValid = true; // STOP the loop
-                }
-            }while(!bValid);
-        }
+            {
+                arrCells[pCoordinate.x][pCoordinate.y].setPit();
+                bValid = true; // STOP the loop
+            }
+        }while(!bValid);
+        System.out.println("Pit: "+pCoordinate.x + " " + pCoordinate.y);
+
     }
 
-    /**
-     * Set the Gold location randomly
-     * @return Point where the Gold location is located. Possible coordinate is from 0-MAX DIMENSION Col and Row
-     */
     private Point setGold()
     {
         boolean bValid = false;
         Random rRand = new Random(); //instance of random class
         int nUpperbound = MAX_DIMENSION;
         Point pCoordinate = new Point();
-        
-        // Loop until valid coordinates to place GOLD
+
+
         do
         {
             //generate random values from 0-24
-            pCoordinate.x = rRand.nextInt(nUpperbound); 
+            pCoordinate.x = rRand.nextInt(nUpperbound);
             pCoordinate.y = rRand.nextInt(nUpperbound);
-            if (   arrCells[pCoordinate.x][pCoordinate.y].isFreeTerrain() 
-                &&  !arrCells[pCoordinate.x][pCoordinate.y].isMiner())  //If the miner is not in the cell
+            if (   arrCells[pCoordinate.x][pCoordinate.y].isFreeTerrain()
+                    &&  !arrCells[pCoordinate.x][pCoordinate.y].isMiner())  //If the miner is not in the cell
             {
                 arrCells[pCoordinate.x][pCoordinate.y].setGold();
                 bValid = true; // STOP the loop
             }
         }while(!bValid);
-
+        System.out.println("Gold: "+pCoordinate.x + " " + pCoordinate.y);
         return pCoordinate;
     }
 
-
-    /**
-     * Set the beacon randomly
-     * 
-     * @param pGoldCoordinate Point coordinates where the gold is placed
-     */
     private void setBeacon(Point pGoldCoordinate)
     {
         boolean bValid = false;
         Random rRand = new Random(); //instance of random class
         int nUpperbound = MAX_DIMENSION;
         Point pCoordinate = new Point();
-        
-        // Loop until the right count of BEACONS is place in the board
-        for (int i=0; i< Math.round(MAX_DIMENSION * 0.1); i++)
+
+
+        do
         {
-            // Loop until valid coordinates to place BEACON
-            do
-            {
-                //generate random values from 0-24
-                pCoordinate.x = rRand.nextInt(nUpperbound); 
-                pCoordinate.y = rRand.nextInt(nUpperbound);
-                if (   arrCells[pCoordinate.x][pCoordinate.y].isFreeTerrain() 
+            //generate random values from 0-24
+            pCoordinate.x = rRand.nextInt(nUpperbound);
+            pCoordinate.y = rRand.nextInt(nUpperbound);
+            if (   arrCells[pCoordinate.x][pCoordinate.y].isFreeTerrain()
                     &&  !arrCells[pCoordinate.x][pCoordinate.y].isMiner())  //If the miner is not in the cell
-                {
-                    arrCells[pCoordinate.x][pCoordinate.y].setBeacon(pGoldCoordinate);
-                    bValid = true; // STOP the loop
-                }
-            }while(!bValid);
-    
-        }
+            {
+                arrCells[pCoordinate.x][pCoordinate.y].setBeacon(pGoldCoordinate);
+                bValid = true; // STOP the loop
+            }
+        }while(!bValid);
+
     }
-    /**
-     * Gets the MAX_DIMENSION of the board 
-     * @return
-     */
+
     public int getMAX_DIMENSION ()
     {
         return MAX_DIMENSION;
     }
 
-    /**
-     * Executes the wanted action to the MAIN BOARD
-     * @param charAction action to be done. M == Move, R == Rotate, S == Scan
-     * @return String:  M,<number> if moved in beacon Tile, 
-     *                  M,PIT if moved in pit tile, 
-     *                  M,GOLD if moved in gold tile, 
-     * 
-     *                  S,BEACON if scanned a beacon tile
-     *                  S,PIT if scanned a pit tile
-     *                  S,GOLD if scanned a gold tile
-     * 
-     *                  otherwise NULL
-     */
-    private String executeAction (char charAction)
+    public void display()
     {
-        String strReturn = new String();
-        // If valid action
-        // Check if correct parameters
-        if(isValidAction(charAction, arrCells[pMinerCurrCoordinate.x][pMinerCurrCoordinate.y]))
+        for(int i = 0; i<MAX_DIMENSION;i++)
         {
-            switch(charAction)
-            {
-                case 'M':
-                    strReturn = move();
-                    break;
-                case 'S':
-                    strReturn = scan();
-                    break;
-                case 'R':
-                    rotate();
-                    break;
-            }
+            for(int j = 0; j<MAX_DIMENSION;j++)
+                System.out.print(arrCells[i][j]+" ");
+            System.out.println();
         }
-
-        return strReturn;
     }
 
-    /**
-     * Moves the miner in front of the direction where miner is facing
-     * @return String:  M,<number> if moved in beacon Tile, 
-     *                  M,PIT if moved in pit tile, 
-     *                  M,GOLD if moved in gold tile, 
-     * 
-     *                  Otherwise, NULL
-     */
-    private String move()
+    /*
+    * This method checks the table if the exact cell
+        contains a specific element.
+    * @param x - x-Coordinate
+    * @param y - y-Coordinate
+    * @param toFind - String to check.
+    * */
+    public boolean cellContains(int x,int y, String toFind)
     {
-        String strReturn = new String();
-        Miner tempMiner = arrCells[pMinerCurrCoordinate.x][pMinerCurrCoordinate.y].getMiner();
-        arrCells[pMinerCurrCoordinate.x][pMinerCurrCoordinate.y].removeMiner(); // Removes miner from intial cell
-        switch(tempMiner.getDirection())
-        {
-            case "RIGHT":
-                pMinerCurrCoordinate.x = getMinerCoordinate().x+1;
-                break;
-            case "LEFT":
-                pMinerCurrCoordinate.x = getMinerCoordinate().x-1;
-                break;
-            case "UP":
-                pMinerCurrCoordinate.y = getMinerCoordinate().y-1;
-                break;
-            case "DOWN":
-                pMinerCurrCoordinate.y = getMinerCoordinate().y+1;
-                break;
-        }
-        // Place new miner
-        arrCells[pMinerCurrCoordinate.x][pMinerCurrCoordinate.y].setMiner(tempMiner);
-        // Check if BEACON
-        if (arrCells[pMinerCurrCoordinate.x][pMinerCurrCoordinate.y].isBeacon() != 0)
-        {
-            // Convert int to String
-            strReturn = "M," + arrCells[pMinerCurrCoordinate.x][pMinerCurrCoordinate.y].isBeacon();
-        }
-        // Check if PIT
-        else if (arrCells[pMinerCurrCoordinate.x][pMinerCurrCoordinate.y].isPit())
-        {
-            strReturn = "M,PIT";
-        }
-        // Check if GOLD
-        else if (arrCells[pMinerCurrCoordinate.x][pMinerCurrCoordinate.y].isGold())
-        {
-            strReturn = "M,GOLD";
-        }
-
-        return strReturn;
+        return arrCells[x][y].getStrSymbol().contains(toFind);
     }
 
-    /**
-     * Scans the COLUMN OR COLUMN base on the location of the miner and direction where the miner is facing
-     * @return String:  PIT if it scanned pit tile,
-     *                  BEACON if it scanned BEACON,
-     *                  GOLD if it scanned GOLD,
-     *                  Otherwise, NULL
-     */
-    private String scan ()
-    {   
-        String strReturn = new String(); 
-        switch(arrCells[pMinerCurrCoordinate.x][pMinerCurrCoordinate.y].getMiner().getDirection())
-        {
-            // SCANS RIGHT
-            case "RIGHT":
-                for (int i = pMinerCurrCoordinate.x + 1; i < MAX_DIMENSION; i++)
-                {
-                    strReturn = getTileName(arrCells[i][pMinerCurrCoordinate.y]);
-                    // Checks if the tile is a SPECIAL Tile 
-                    if (strReturn!= null)
-                    {
-                        // END FOR-LOOP
-                        i = MAX_DIMENSION;
-                    }
+    /*Finds it in arrCell, returns Point.
+     * This Method checks the board for a specific element.
+     * If the element is found, return the Point coordinate.
+     * Else, returns a coordinate with -1 as its x-Coordinate.
+     *
+     * @param toFind - String to find.
+     * */
+    public Point boardFind(String toFind)
+    {
+        Point coord = new Point();
+        coord.x = -1;
+        for(int i = 0; i<MAX_DIMENSION;i++)
+            for (int j = 0; j < MAX_DIMENSION; j++)
+                if (arrCells[i][j].getStrSymbol().contains(toFind)) {
+                    coord.x = i;
+                    coord.y = j;
+                    break;
                 }
-                break;
-            // SCANS LEFT
-            case "LEFT":
-                for (int i = pMinerCurrCoordinate.x - 1; i > 0; i--)
-                {
-                    strReturn = getTileName(arrCells[i][pMinerCurrCoordinate.y]);
-                    // Checks if the tile is a SPECIAL Tile 
-                    if (strReturn!= null)
-                    {
-                        // END FOR-LOOP
-                        i = 0;
-                    }
+        return coord;
+    }
+
+    //Problem: 1. The Miner Object in Cell.
+    /*
+     * Given the coordinates and String, This method updates
+     * the position of an object on the table.
+     *
+     * @param x - x-Coordinate
+     * @param y - y-Coordinate
+     * @param toUpdate - String to replace.
+     *
+     * */
+    public void updatePos(int x, int y,String toUpdate)
+    {
+        //For Miner
+        arrCells[x][y].setStrSymbol(toUpdate);
+    }
+
+    /*
+     * This method checks the table
+     * if the Agent is currently in the pit.
+     *
+     * */
+    public boolean isPit()
+    {
+        for(int i = 0; i<MAX_DIMENSION;i++)
+            for (int j = 0; j < MAX_DIMENSION; j++)
+                if (arrCells[i][j].getStrSymbol().contains("A")) {
+                    if(arrCells[i][j].isPit())
+                        return true;
                 }
-                break;
-            // SCANS UPWARD
-            case "UP":
-                for (int i = pMinerCurrCoordinate.y - 1; i > 0; i--)
-                {
-                    strReturn = getTileName(arrCells[pMinerCurrCoordinate.x][i]);
-                    // Checks if the tile is a SPECIAL Tile 
-                    if (strReturn!= null)
-                    {
-                        // END FOR-LOOP
-                        i = 0;
-                    }
+        return false;
+    }
+    /*
+     * This method checks the table
+     * if the Agent is currently on the Beacon.
+     *
+     * */
+    public boolean isBeacon()
+    {
+        for(int i = 0; i<MAX_DIMENSION;i++)
+            for (int j = 0; j < MAX_DIMENSION; j++)
+                if (arrCells[i][j].getStrSymbol().contains("A")) {
+                    if(arrCells[i][j].cellBeacon())
+                        return true;
                 }
-                break;
-            case "DOWN":
-                for (int i = pMinerCurrCoordinate.y + 1; i < MAX_DIMENSION; i++)
-                {
-                    strReturn = getTileName(arrCells[pMinerCurrCoordinate.x][i]);
-                    // Checks if the tile is a SPECIAL Tile 
-                    if (strReturn!= null)
-                    {
-                        // END FOR-LOOP
-                        i = MAX_DIMENSION;
-                    }
-                }
-                break;
-        }
-
-        return strReturn;
+        return false;
     }
 
-    /**
-     * Gets the String value of what tile kind of tile is placed in the cell
-     * @param cCell Cell to be checked
-     * @return String:  BEACON if cell is set to be beacon
-     *                  PIT if cell is set to be pit
-     *                  GOLD if cell is set to be gold
-     */
-    private String getTileName(Cell cCell)
+    /*
+     * Given the Coordiantes, This method checks
+     * if the current cell is a beacon. If it is,
+     * return the helpful hint. Else, return -1.
+     *
+     * @param x - x-Coordinate
+     * @param y - y-Coordinate
+     * */
+    public int getHint(int x,int y)
     {
-        if(cCell.isBeacon() != 0)
-        {
-            return "BEACON";
-        }
-        else if (cCell.isPit())
-        {
-            return "PIT";
-        }
-        else if (cCell.isGold())
-        {
-            return "GOLD";
-        }
-        else
-        {
-            return null;
-        }
-    } 
-
-    /**
-     * Rotates the direction of the Miner
-     */
-    private void rotate ()
-    {
-        arrCells[pMinerCurrCoordinate.x][pMinerCurrCoordinate.y].getMiner().rotate();
+        return arrCells[x][y].isBeacon();
     }
 
-    /**
-     * Checks if the inputted Action is valid action from the current state
-     * @param charAction Action to be done (M == Move, R == Rotate, S == Scan)
-     * @param cMinerCurrCell The cell where Miner is currently IN
-     * @return TRUE if the action is valid, otherwise FALSE
-     */
-    private boolean isValidAction (char charAction, Cell cMinerCurrCell)
-    {
-        boolean bValidAction = true;
-        // No Miner in the Curr Cell
-        if(cMinerCurrCell.getMiner() == null)
-        {
-            bValidAction = false;
-        }
-        // Check if the action is move
-        else if (charAction == 'M')
-        {
-            switch(cMinerCurrCell.getMiner().getDirection())
-            {
-
-                case "RIGHT":
-                    bValidAction = getMinerCoordinate().x-1 < MAX_DIMENSION;
-                    break;
-                case "LEFT":
-                    bValidAction = getMinerCoordinate().x+1 < MAX_DIMENSION;
-                    break;
-                case "UP":
-                    bValidAction = getMinerCoordinate().y-1 < MAX_DIMENSION;
-                    break;
-                case "DOWN":
-                    bValidAction = getMinerCoordinate().y+1 < MAX_DIMENSION;
-                    break;
-            }
-        }
-        else if (   charAction != 'R' 
-                ||  charAction != 'S')
-        {
-            bValidAction = false;
-        }
-
-        return bValidAction;
+    // To delete. For testing
+    public static void main(String[] args) {
+        Board board = new Board(8);
+        int max = board.getMAX_DIMENSION();
+        System.out.println(max);
     }
-
-    /** 
-     * Gets the coordinates of the cell where Miner is currently in
-     * @return Point: Coordinates of the cell where Miner is currently in
-     */
-    private Point getMinerCoordinate ()
-    {
-        return pMinerCurrCoordinate;
-    }
-
 }
