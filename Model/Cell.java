@@ -10,87 +10,98 @@ public class Cell {
     private boolean bGold;
     private boolean bPit;
     private Miner mMiner;
+
     private String strSymbol;
 
-    public Cell(){ // Default
-        this.nBeacon=-1;
-        this.bGold=false;
-        this.bPit=false;
-        this.mMiner=null;
+    public Cell() { // Default
+        this.nBeacon = -1;
+        this.bGold = false;
+        this.bPit = false;
+        this.mMiner = null;
         strSymbol = "*";
     }
 
-    public void setWeight(int weight){
-        this.nWeight=weight;
+    public void setWeight(int weight) {
+        this.nWeight = weight;
     }
 
-    public void setBeacon(Point pGoldCoordinates){
-        this.nBeacon= (int) Point2D.distance(pGoldCoordinates.x, pGoldCoordinates.x,
-                pGoldCoordinates.y, pGoldCoordinates.y);
+    public void setBeacon(Point pGoldCoordinates) {
+        this.nBeacon = (int) Point2D.distance(pGoldCoordinates.x, pGoldCoordinates.x, pGoldCoordinates.y, pGoldCoordinates.y);
+
         strSymbol = "B";
     }
 
-    public void setGold(){
-        this.bGold=true;
+    public void setGold() {
+        this.bGold = true;
         strSymbol = "G";
     }
 
-    public void setPit(){
-        this.bPit=true;
+    public void setPit() {
+        this.bPit = true;
         strSymbol = "P";
     }
 
-    public void setMiner(){
+    public void setMiner() {
         this.mMiner = new Miner();
+    }
+
+    public void setMiner(Miner miner) {
+        this.mMiner = miner;
+    }
+
+    public void removeMiner() {
+        this.mMiner = null;
         strSymbol = "A";
     }
 
-    public int getWeight(){
+    public int getWeight() {
         return nWeight;
     }
 
-    public int isBeacon(){
+    public int isBeacon() {
         return nBeacon;
     }
 
-    public boolean isGold(){
+    public boolean isGold() {
         return bGold;
     }
 
-    public boolean isPit(){
+    public boolean isPit() {
         return bPit;
     }
 
+    public Miner getMiner() {
+        return this.mMiner;
+    }
     ///For the hints.
-    public boolean cellBeacon() {
-        if(nBeacon>0)
-        {
-            System.out.println("Beacon Hint:"+nBeacon);
+    public boolean cellBeacon () {
+        if (nBeacon > 0) {
+            System.out.println("Beacon Hint:" + nBeacon);
             return true;
         }
         return false;
     }
 
-    public boolean isMiner(){
-        if(this.mMiner!=null)
-            return true;
+    public boolean isMiner() {
+        if (this.mMiner != null) return true;
         return false;
     }
 
-    public boolean isFreeTerrain(){
-        if(!this.bGold && !this.bPit)
-            return true;
+    public boolean isFreeTerrain () {
+        if (!this.bGold && !this.bPit) return true;
 
         return false;
     }
 
-    public String getStrSymbol(){ return strSymbol;}
+    public String getStrSymbol() {
+        return strSymbol;
+    }
 
-    public void setStrSymbol(String symbol){ strSymbol = symbol;}
+    public void setStrSymbol (String symbol){
+        strSymbol = symbol;
+    }
 
-    @Override
-    public String toString()
-    {
+    @Override public String toString () {
         return strSymbol;
     }
 }

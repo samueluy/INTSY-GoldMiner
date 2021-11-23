@@ -8,8 +8,8 @@ class Board
     private static int MAX_DIMENSION = 8;
 
     /**
-     * 
-     * @param nDimension 
+     *
+     * @param nDimension
      */
     public Board (int nDimension)
     {
@@ -44,7 +44,7 @@ class Board
             pCoordinate.x = rRand.nextInt(nUpperbound);
             pCoordinate.y = rRand.nextInt(nUpperbound);
             if (   arrCells[pCoordinate.x][pCoordinate.y].isFreeTerrain()
-                &&  !arrCells[pCoordinate.x][pCoordinate.y].isMiner())  //If the miner is not in the cell
+                    &&  !arrCells[pCoordinate.x][pCoordinate.y].isMiner())  //If the miner is not in the cell
             {
                 arrCells[pCoordinate.x][pCoordinate.y].setPit();
                 bValid = true; // STOP the loop
@@ -60,15 +60,15 @@ class Board
         Random rRand = new Random(); //instance of random class
         int nUpperbound = MAX_DIMENSION;
         Point pCoordinate = new Point();
-        
-        
+
+
         do
         {
             //generate random values from 0-24
-            pCoordinate.x = rRand.nextInt(nUpperbound); 
+            pCoordinate.x = rRand.nextInt(nUpperbound);
             pCoordinate.y = rRand.nextInt(nUpperbound);
-            if (   arrCells[pCoordinate.x][pCoordinate.y].isFreeTerrain() 
-                &&  !arrCells[pCoordinate.x][pCoordinate.y].isMiner())  //If the miner is not in the cell
+            if (   arrCells[pCoordinate.x][pCoordinate.y].isFreeTerrain()
+                    &&  !arrCells[pCoordinate.x][pCoordinate.y].isMiner())  //If the miner is not in the cell
             {
                 arrCells[pCoordinate.x][pCoordinate.y].setGold();
                 bValid = true; // STOP the loop
@@ -84,15 +84,15 @@ class Board
         Random rRand = new Random(); //instance of random class
         int nUpperbound = MAX_DIMENSION;
         Point pCoordinate = new Point();
-        
-        
+
+
         do
         {
             //generate random values from 0-24
-            pCoordinate.x = rRand.nextInt(nUpperbound); 
+            pCoordinate.x = rRand.nextInt(nUpperbound);
             pCoordinate.y = rRand.nextInt(nUpperbound);
-            if (   arrCells[pCoordinate.x][pCoordinate.y].isFreeTerrain() 
-                &&  !arrCells[pCoordinate.x][pCoordinate.y].isMiner())  //If the miner is not in the cell
+            if (   arrCells[pCoordinate.x][pCoordinate.y].isFreeTerrain()
+                    &&  !arrCells[pCoordinate.x][pCoordinate.y].isMiner())  //If the miner is not in the cell
             {
                 arrCells[pCoordinate.x][pCoordinate.y].setBeacon(pGoldCoordinate);
                 bValid = true; // STOP the loop
@@ -119,7 +119,6 @@ class Board
     /*
     * This method checks the table if the exact cell
         contains a specific element.
-
     * @param x - x-Coordinate
     * @param y - y-Coordinate
     * @param toFind - String to check.
@@ -130,12 +129,12 @@ class Board
     }
 
     /*Finds it in arrCell, returns Point.
-    * This Method checks the board for a specific element.
-    * If the element is found, return the Point coordinate.
-    * Else, returns a coordinate with -1 as its x-Coordinate.
-    *
-    * @param toFind - String to find.
-    * */
+     * This Method checks the board for a specific element.
+     * If the element is found, return the Point coordinate.
+     * Else, returns a coordinate with -1 as its x-Coordinate.
+     *
+     * @param toFind - String to find.
+     * */
     public Point boardFind(String toFind)
     {
         Point coord = new Point();
@@ -152,14 +151,14 @@ class Board
 
     //Problem: 1. The Miner Object in Cell.
     /*
-    * Given the coordinates and String, This method updates
-    * the position of an object on the table.
-    *
-    * @param x - x-Coordinate
-    * @param y - y-Coordinate
-    * @param toUpdate - String to replace.
-    *
-    * */
+     * Given the coordinates and String, This method updates
+     * the position of an object on the table.
+     *
+     * @param x - x-Coordinate
+     * @param y - y-Coordinate
+     * @param toUpdate - String to replace.
+     *
+     * */
     public void updatePos(int x, int y,String toUpdate)
     {
         //For Miner
@@ -198,13 +197,13 @@ class Board
     }
 
     /*
-    * Given the Coordiantes, This method checks
-    * if the current cell is a beacon. If it is,
-    * return the helpful hint. Else, return -1.
-    *
-    * @param x - x-Coordinate
-    * @param y - y-Coordinate
-    * */
+     * Given the Coordiantes, This method checks
+     * if the current cell is a beacon. If it is,
+     * return the helpful hint. Else, return -1.
+     *
+     * @param x - x-Coordinate
+     * @param y - y-Coordinate
+     * */
     public int getHint(int x,int y)
     {
         return arrCells[x][y].isBeacon();
