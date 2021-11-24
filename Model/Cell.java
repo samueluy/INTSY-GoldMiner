@@ -10,7 +10,6 @@ public class Cell {
     private boolean bGold;
     private boolean bPit;
     private Miner mMiner;
-
     private String strSymbol;
 
     public Cell() { // Default
@@ -43,16 +42,15 @@ public class Cell {
 
     public void setMiner() {
         this.mMiner = new Miner();
+        strSymbol = "A";
     }
 
     public void setMiner(Miner miner) {
         this.mMiner = miner;
-        strSymbol = "A";
     }
 
     public void removeMiner() {
         this.mMiner = null;
-        strSymbol = "A";
     }
 
     public int getWeight() {
