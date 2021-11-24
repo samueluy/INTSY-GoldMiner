@@ -47,6 +47,7 @@ public class Cell {
 
     public void setMiner(Miner miner) {
         this.mMiner = miner;
+        strSymbol = "A";
     }
 
     public void removeMiner() {
