@@ -84,6 +84,11 @@ public class Node implements Cloneable{
         {
             bValidAction = false;
         }
+        // Check if will result to a GAMEOVER move
+        else if (cMinerCurrCell.isPit())
+        {
+            bValidAction = false;
+        }
         // Check if the action is move
         else
         {
