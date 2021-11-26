@@ -2,7 +2,7 @@ package Model;
 
 import java.awt.*;
 import java.awt.geom.Point2D; // for distance formula
-
+import java.lang.Math;
 
 public class Cell {
     private int nWeight;
@@ -24,8 +24,9 @@ public class Cell {
         this.nWeight = weight;
     }
 
-    public void setBeacon(Point pGoldCoordinates) {
-        this.nBeacon = (int) Point2D.distance(pGoldCoordinates.x, pGoldCoordinates.x, pGoldCoordinates.y, pGoldCoordinates.y);
+    public void setBeacon(Point pBeaconCoordinates, Point pGoldCoordinates) {
+        this.nBeacon = Math.abs(pBeaconCoordinates.x-pGoldCoordinates.x) + Math.abs(pBeaconCoordinates.y-
+                pGoldCoordinates.y);
 
         strSymbol = "B";
     }
