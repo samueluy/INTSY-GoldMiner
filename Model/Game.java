@@ -8,9 +8,11 @@ public class Game
 {
     private Board tempBoard;
     private int beaconFlag = -1;
+    private randomAgent agent;
 
     public Game(int nDimension) {            //Agent PARAMETER soon.
         tempBoard = new Board(nDimension);
+        agent = new randomAgent();
     }
 
     /*
@@ -26,8 +28,8 @@ public class Game
         String input = "";
         while( !(input.contains("QUIT")) )
         {
-            input = kb.nextLine();
-            if(input.length() < 2)
+            input = agent.randomMove();
+            if(input.length() < 2 || input.compareToIgnoreCase("rotate") == 0 || input.compareToIgnoreCase("scan") == 0)
                 action(input);
             if(!isGameOver())
                 break;
@@ -37,17 +39,18 @@ public class Game
                 break;
             }
         }
+
         if(pitFlag == 1)
             System.out.println("Russian Man: You Failed me. *Shoots*");
         else {
             try {
                 System.out.println("You: *Hands Over Gold*");
                 TimeUnit.SECONDS.sleep(5);
-                System.out.println("Russian Man: Very well, Soldier.");
+                System.out.println("Russian Man: Good work, Soldier.");
                 TimeUnit.SECONDS.sleep(2);
                 System.out.println("Russian Man: *Shoots*");
                 TimeUnit.SECONDS.sleep(2);
-                System.out.println("Russian Man: Nothing personal...");
+                System.out.println("Russian Man: Nothing personal…");
                 TimeUnit.SECONDS.sleep(3);
                 System.out.println("Russian Man: Comrade.");
                 TimeUnit.SECONDS.sleep(1);
@@ -126,7 +129,17 @@ public class Game
             if(flag != 1)
                 tempBoard.updatePos(xCoord, yCoord, "*");
 
+            //Updates the Current Location of Miner.
+            tempBoard.setpMinerCurrCoordinate(tempBoard.boardFind("A"));
             tempBoard.display();
+        }
+        //Agent uses scan.
+        else if(dir.contains("S") || dir.contains("Scan") || dir.contains("scan"))
+            System.out.println(tempBoard.scan());
+        //Agent uses rotate.
+        else if(dir.contains("Rotate") || dir.contains("rotate")) {
+            tempBoard.rotate();
+            System.out.println("Current Direction "+tempBoard.getMinerDirection());
         }
         else
             System.out.println("Russian Man: Invalid Move, Comrade.");
@@ -144,19 +157,19 @@ public class Game
     public boolean validMove(String dir,int x,int y)
     {
         boolean flag = false;
-        if(dir.contains("U")) {
+        if(dir.contains("U") && tempBoard.getMinerDirection().contains("U")) {
             if((x - 1 < 8 && x-1 >= 0))
                 flag = true;
         }
-        else if(dir.contains("D")){
+        else if(dir.contains("D") && tempBoard.getMinerDirection().contains("D")){
             if((x + 1 < 8 && x + 1 >= 0))
                 flag = true;
         }
-        else if(dir.contains("L")){
+        else if(dir.contains("L") && tempBoard.getMinerDirection().contains("L")){
             if((y - 1 < 8 && y-1 >= 0))
                 flag = true;
         }
-        else if(dir.contains("R")){
+        else if(dir.contains("R") && tempBoard.getMinerDirection().contains("R") && dir.compareToIgnoreCase("rotate") != 0){
             if((y + 1 < 8 && y + 1 >= 0))
                 flag = true;
         }
@@ -180,5 +193,11 @@ public class Game
     public static void main(String[] args) {
         Game thisGame = new Game(8);
         thisGame.play();
+
+       // Random test = new Random();
+/*
+        for (int i = 0; i <100 ; i++)
+            System.out.println("Random Move: "+thisGame.randomAgent());*/
+
     }
 }
