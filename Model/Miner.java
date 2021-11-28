@@ -17,5 +17,24 @@ public class Miner {
         this.strDirection = "RIGHT";
     }
 
+    /**
+     * Rotates the direction of the Miner Clockwise.
+     */
+    public void rotate(){
+        switch(strDirection){
+            case "RIGHT":
+                strDirection = "DOWN";
+                break;
+            case "DOWN":
+                strDirection = "LEFT";
+                break;
+            case "LEFT":
+                strDirection = "UP";
+                break;
+            case "UP":
+                strDirection = "RIGHT";
+                break;
+        }
+    }
 
 }
