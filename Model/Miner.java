@@ -4,7 +4,6 @@ public class Miner {
     private String strDirection;
     private int nCount;
 
-
     public void move(){}
     public void scan(){}
     public void isValidMove(){}
@@ -28,7 +27,7 @@ public class Miner {
                 break;
         }
     }
-    
+
     public Miner(){
         this.strDirection = "RIGHT";
     }
