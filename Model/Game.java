@@ -1,64 +1,125 @@
+package Model;
+
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
+//Represents a Game class
 public class Game
 {
-    //private Agent agent
-    private boolean gameOver;
-    private String[][] tempBoard;
-    //private board gameBoard;
+    //private String[][] tempBoard;
+    private static MinerAgent aMiner;
+    private Board gameBoard;
+    private boolean bGameOver;
 
-    public Game() {            //Agent agent)
-        tempBoard = new String[8][8];
-        initBoard();
-    }
-    private void initBoard()
+    //Creates an instance of Game given dimension of board
+    // and level of rational behavior
+    public Game()
     {
-        int i,j;
-        int Min = 0;
-        int Max = 7;
-        boolean exitFlag = false;
-        boolean flagG = false, flagB = false,flagD = false;
-
-        for (i = 0;i< tempBoard.length;i++)
-        {
-            for(j = 0; j< tempBoard[0].length;j++)
-                tempBoard[i][j] = "*";
-        }
-        tempBoard[0][0] = "A";
-
-        while(!exitFlag)
-        {
-            i = Min + (int)(Math.random() * ((Max - Min) + 1));
-            j = Min + (int)(Math.random() * ((Max - Min) + 1));
-            if(tempBoard[i][j].contains("*") && !flagG) {
-                tempBoard[i][j] = "G";
-                flagG = true;
-            }
-            if(tempBoard[i][j].contains("*") && !flagB) {
-                tempBoard[i][j] = "B";
-                flagB = true;
-            }
-            ///Will modify this one soon.
-            if(tempBoard[i][j].contains("*") && !flagD) {
-                tempBoard[i][j] = "D";
-                flagD = true;
-            }
-            if(flagB && flagD && flagG)
-                exitFlag = true;
-        }
+        bGameOver = false; //game is not over
     }
 
-    private void display()
+    //will either make aMiner a LEVEL R or LEVEL S MinerAgent depending
+    //on the button clicked during start up game (Random or Smart Button)
+    public void setLevel(String strLvlOfRationalBehavior)
     {
-        for (int i = 0;i< tempBoard.length;i++)
+        aMiner = null; //will reset aMiner when game is finished
+        switch (strLvlOfRationalBehavior)
         {
-            for(int j = 0; j< tempBoard[0].length;j++)
-                System.out.print(tempBoard[i][j]+" ");
-            System.out.println();
+            case "Random":
+                aMiner = new randomAgent();
+                break;
+            case "Smart":
+                //aMiner = new smartAgent();
+                break;
         }
-
     }
+
+    //will create a new board depending on nDimension's value
+    public void setBoardDimension(int nDimension)
+    {
+        gameBoard = null; //will reset gameBoard when game is finished
+        gameBoard = new Board(nDimension);
+    }
+
+
+    //returns aMiner (may return Random or Smart depending on Level)
+    public static MinerAgent getMinerAgent()
+    {
+        return aMiner;
+    }
+
+    //returns the current instance of gameBoard
+    public Board getGameBoard()
+    {
+        return this.gameBoard;
+    }
+
+    //will set bGameOver to TRUE if miner fell to pit or found gold
+    //will set bGameOver to FALSE when Game and GUI resets (GUI goes back to Main Menu)
+    public void setIsGameOver(boolean isGameOver)
+    {
+        this.bGameOver = isGameOver;
+    }
+
+    //returns TRUE if game is over (miner fell to pit or found gold)
+    //FALSE otherwise
+    public boolean isGameOver()
+    {
+        return this.bGameOver;
+    }
+
+    //public Game() {            //Agent agent)
+    //    tempBoard = new String[8][8];
+    //    initBoard();
+    //}
+    
+    //private void initBoard()
+    //{
+    //    int i,j;
+    //    int Min = 0;
+    //    int Max = 7;
+    //    boolean exitFlag = false;
+    //    boolean flagG = false, flagB = false,flagD = false;
+    //
+    //    for (i = 0;i< tempBoard.length;i++)
+    //    {
+    //        for(j = 0; j< tempBoard[0].length;j++)
+    //            tempBoard[i][j] = "*";
+    //    }
+    //    tempBoard[0][0] = "A";
+    //
+    //    while(!exitFlag)
+    //    {
+    //        i = Min + (int)(Math.random() * ((Max - Min) + 1));
+    //        j = Min + (int)(Math.random() * ((Max - Min) + 1));
+    //        if(tempBoard[i][j].contains("*") && !flagG) {
+    //            tempBoard[i][j] = "G";
+    //            flagG = true;
+    //        }
+    //        if(tempBoard[i][j].contains("*") && !flagB) {
+    //            tempBoard[i][j] = "B";
+    //            flagB = true;
+    //        }
+    //        ///Will modify this one soon.
+    //        if(tempBoard[i][j].contains("*") && !flagD) {
+    //            tempBoard[i][j] = "D";
+    //            flagD = true;
+    //        }
+    //        if(flagB && flagD && flagG)
+    //            exitFlag = true;
+    //    }
+    //}
+
+    //private void display()
+    //{
+    //    for (int i = 0;i< tempBoard.length;i++)
+    //    {
+    //        for(int j = 0; j< tempBoard[0].length;j++)
+    //            System.out.print(tempBoard[i][j]+" ");
+    //        System.out.println();
+    //    }
+    //
+    //}
 
     /*Given the desired direction, if valid,
     * change and update the array.*/
@@ -124,29 +185,29 @@ public class Game
         return flag;
     }
 
-    public static void main(String[] args) {
-        Game gg = new Game();
-        Scanner kb = new Scanner(System.in);
-
-        String input = "";
-        gg.display();
-        while( !(input.contains("QUIT")) )
-        {
-            input = kb.nextLine();
-            if(input.length() < 2) {
-                gg.action(input);
-            }
-        }
-
-        /*Keep it for now HAHA*/
-        try {
-            System.out.println("Russian Man: Nothing personal...");
-            TimeUnit.SECONDS.sleep(3);
-            System.out.println("Russian Man: Comrade.");
-            TimeUnit.SECONDS.sleep(1);
-            System.out.println("Russian Man: *Shoots*");
-        } catch(InterruptedException e){
-            System.err.format("IOException: %s%n", e);
-        }
-    }
+    //public static void main(String[] args) {
+    //    Game gg = new Game();
+    //    Scanner kb = new Scanner(System.in);
+    //
+    //    String input = "";
+    //    gg.display();
+    //    while( !(input.contains("QUIT")) )
+    //    {
+    //        input = kb.nextLine();
+    //        if(input.length() < 2) {
+    //            gg.action(input);
+    //        }
+    //    }
+    //
+    //    /*Keep it for now HAHA*/
+    //    try {
+    //        System.out.println("Russian Man: Nothing personal...");
+    //        TimeUnit.SECONDS.sleep(3);
+    //        System.out.println("Russian Man: Comrade.");
+    //        TimeUnit.SECONDS.sleep(1);
+    //        System.out.println("Russian Man: *Shoots*");
+    //    } catch(InterruptedException e){
+    //        System.err.format("IOException: %s%n", e);
+    //    }
+    //}
 }

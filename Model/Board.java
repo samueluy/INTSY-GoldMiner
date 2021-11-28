@@ -7,7 +7,7 @@ class Board
     private Cell[][] arrCells; // BOARD
     private static int MAX_DIMENSION = 8;
     private static Point pMinerCurrCoordinate; //Miner Coordinate Tracker
-    private String minerDirection;
+    //private String minerDirection;
 
     /** Constructs the board class
      *
@@ -23,7 +23,7 @@ class Board
                 arrCells[i][y] = new Cell();
             }
         }
-        minerDirection = "RIGHT";
+        //minerDirection = "RIGHT";
 
         setMiner();
         setBeacon(setGold());
@@ -38,7 +38,7 @@ class Board
     {
         pMinerCurrCoordinate.x = 0;
         pMinerCurrCoordinate.y = 0;
-        arrCells[pMinerCurrCoordinate.x][pMinerCurrCoordinate.y].setMiner();
+        arrCells[pMinerCurrCoordinate.x][pMinerCurrCoordinate.y].setMiner(true);
     }
 
     /**
@@ -123,7 +123,7 @@ class Board
             if (   arrCells[pCoordinate.x][pCoordinate.y].isFreeTerrain()
                     &&  !arrCells[pCoordinate.x][pCoordinate.y].isMiner())  //If the miner is not in the cell
             {
-                arrCells[pCoordinate.x][pCoordinate.y].setBeacon(pGoldCoordinate);
+                arrCells[pCoordinate.x][pCoordinate.y].setBeacon(pCoordinate, pGoldCoordinate);
                 bValid = true; // STOP the loop
             }
         }while(!bValid);
@@ -134,20 +134,20 @@ class Board
      * Gets the MAX_DIMENSION of the board
      * @return int
      */
-    public int getMAX_DIMENSION ()
+    public static int getMAX_DIMENSION ()
     {
         return MAX_DIMENSION;
     }
 
-    public void display()
-    {
-        for(int i = 0; i<MAX_DIMENSION;i++)
-        {
-            for(int j = 0; j<MAX_DIMENSION;j++)
-                System.out.print(arrCells[i][j]+" ");
-            System.out.println();
-        }
-    }
+    //public void display()
+    //{
+    //    for(int i = 0; i<MAX_DIMENSION;i++)
+    //    {
+    //        for(int j = 0; j<MAX_DIMENSION;j++)
+    //            System.out.print(arrCells[i][j]+" ");
+    //        System.out.println();
+    //    }
+    //}
 
     /*
     * This method checks the table if the exact cell
@@ -256,7 +256,8 @@ class Board
     public String scan ()
     {
         String strReturn = "None";
-        switch(minerDirection)
+        //switch(minerDirection)
+        switch(Game.getMinerAgent().getDirectionFacing())
         {
             // SCANS RIGHT
             case "RIGHT":
@@ -301,25 +302,26 @@ class Board
         }
         return strReturn;
     }
+
     /**
      * Rotates the direction of the Miner Clockwise.
      */
-    public void rotate(){
-        switch(minerDirection){
-            case "RIGHT":
-                minerDirection = "DOWN";
-                break;
-            case "DOWN":
-                minerDirection = "LEFT";
-                break;
-            case "LEFT":
-                minerDirection = "UP";
-                break;
-            case "UP":
-                minerDirection = "RIGHT";
-                break;
-        }
-    }
+    //public void rotate(){
+    //    switch(minerDirection){
+    //        case "RIGHT":
+    //            minerDirection = "DOWN";
+    //            break;
+    //        case "DOWN":
+    //            minerDirection = "LEFT";
+    //            break;
+    //        case "LEFT":
+    //            minerDirection = "UP";
+    //            break;
+    //        case "UP":
+    //            minerDirection = "RIGHT";
+    //            break;
+    //    }
+    //}
 
-    public String getMinerDirection() {return minerDirection;}
+    //public String getMinerDirection() {return minerDirection;}
 }

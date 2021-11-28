@@ -51,8 +51,8 @@ public class Controller implements ActionListener{
         if(e.getActionCommand().equals("Random")){
             gui.showStartGoldMiner(nCells, "Random");
         }
-        if(e.getActionCommand().equals("Intelligent")){
-            gui.showStartGoldMiner(nCells, "Intelligent");
+        if(e.getActionCommand().equals("Smart")){
+            gui.showStartGoldMiner(nCells, "Smart");
         }
         if(e.getActionCommand().equals("Start Mining")){
             gui.showJOptionPane(imgCongrats, "Congratulations! You found the gold :))");
@@ -160,7 +160,7 @@ public class Controller implements ActionListener{
     private void getTotalCellNumber(){
         if(gui.getNumOfCellsMenu().getTxtFldNumOfCells().getText().matches("[0-9]+")){
             nCells = Integer.parseInt(gui.getNumOfCellsMenu().getTxtFldNumOfCells().getText());
-            if(!(nCells >= 8 && nCells <= 69)) gui.showJOptionPane(imgError, "Oopsie! Invalid value submitted :((");
+            if(!(nCells >= 8 && nCells <= 64)) gui.showJOptionPane(imgError, "Oopsie! Invalid value submitted :((");
             else gui.showChooseLevelMenu();
         }
         else gui.showJOptionPane(imgError, "Oopsie! Invalid value submitted :((");

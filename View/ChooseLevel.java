@@ -7,24 +7,24 @@ import javax.swing.border.*;
 public class ChooseLevel extends JPanel{
     private JLabel lblInstructions;
     private JButton btnRandom;
-    private JButton btnIntelligent;
+    private JButton btnSmart;
     private JPanel pnlChooseLevel;
     private ImageIcon imgRandom = new ImageIcon("Lib/utilities/RandomBtn.png");
-    private ImageIcon imgIntelligent = new ImageIcon("Lib/utilities/IntelligentBtn.png");
+    private ImageIcon imgSmart = new ImageIcon("Lib/utilities/SmartBtn.png");
 
     public ChooseLevel(){
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBorder(new EmptyBorder(new Insets(96, 96, 96, 96)));
         this.setOpaque(false);
         this.setVisible(true);
-        lblInstructions = new JLabel("<html>What level of intelligent behavior would you like to explore?</html>", SwingConstants.CENTER);
+        lblInstructions = new JLabel("<html>What level of rational behavior would you like to explore?</html>", SwingConstants.CENTER);
         pnlChooseLevel = new JPanel();
         pnlChooseLevel.setLayout(new FlowLayout());
         pnlChooseLevel.setPreferredSize(new Dimension(480, 480));
         pnlChooseLevel.setOpaque(false);
         pnlChooseLevel.setVisible(true);
         btnRandom = new JButton("Random");
-        btnIntelligent = new JButton("Intelligent");
+        btnSmart = new JButton("Smart");
         setUpChooseLevelButtons();
     }
 
@@ -32,8 +32,8 @@ public class ChooseLevel extends JPanel{
         return btnRandom;
     }
 
-    public JButton getBtnIntelligent(){
-        return btnIntelligent;
+    public JButton getBtnSmart(){
+        return btnSmart;
     }
 
     private void setUpChooseLevelButtons(){
@@ -46,7 +46,7 @@ public class ChooseLevel extends JPanel{
         this.add(Box.createRigidArea(new Dimension(0, 96)));
         alterButton(btnRandom, imgRandom);
         pnlChooseLevel.add(Box.createRigidArea(new Dimension(96, 0)));
-        alterButton(btnIntelligent, imgIntelligent);
+        alterButton(btnSmart, imgSmart);
         this.add(pnlChooseLevel);
     }
 

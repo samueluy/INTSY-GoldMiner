@@ -86,7 +86,7 @@ public class GUI{
         numberOfCellsMenu.getTxtFldNumOfCells().addActionListener(listener);
         numberOfCellsMenu.getBtnSubmit().addActionListener(listener);
         chooseLevelMenu.getBtnRandom().addActionListener(listener);
-        chooseLevelMenu.getBtnIntelligent().addActionListener(listener);
+        chooseLevelMenu.getBtnSmart().addActionListener(listener);
         counterScreen.getBtnStartMining().addActionListener(listener);
     }
 

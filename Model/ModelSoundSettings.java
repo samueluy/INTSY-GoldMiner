@@ -2,7 +2,9 @@ package Model;
 
 import java.io.File;
 
-public class ModelSoundSettings{
+//represents the Model version of sound settings in GUI
+public class ModelSoundSettings
+{
     private File[] arrTracks;
 
     /** 
@@ -15,14 +17,17 @@ public class ModelSoundSettings{
     * @apiNote 	   Cloud183. (2008, June 03). Final Fantasy VII - Waltz de Chocobo [HQ]. 
     *                   [Video]. YouTube. Retrieved November 13, 2021 from https://www.youtube.com/watch?v=UB3nB5vdmcs
     */
-    public ModelSoundSettings(){
+    public ModelSoundSettings()
+    {
         arrTracks = new File[4];
         arrTracks[0] = new File("Lib/utilities/TrackDefault.wav");
         arrTracks[1] = new File("Lib/utilities/Track1.wav");
         arrTracks[2] = new File("Lib/utilities/Track2.wav");
     }
 
-    public File getFile(int nIndex){
+    //returns the .wav file when the sound track is changed
+    public File getFile(int nIndex)
+    {
         return arrTracks[nIndex];
     }
 }
