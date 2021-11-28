@@ -4,7 +4,6 @@ public class Miner {
     private String strDirection;
     private int nCount;
 
-
     public void move(){}
     public void scan(){}
     public void isValidMove(){}
@@ -12,14 +11,6 @@ public class Miner {
     public String getDirection(){
         return this.strDirection;
     }
-
-    public Miner(){
-        this.strDirection = "RIGHT";
-    }
-
-    /**
-     * Rotates the direction of the Miner Clockwise.
-     */
     public void rotate(){
         switch(strDirection){
             case "RIGHT":
@@ -36,5 +27,10 @@ public class Miner {
                 break;
         }
     }
+
+    public Miner(){
+        this.strDirection = "RIGHT";
+    }
+
 
 }
