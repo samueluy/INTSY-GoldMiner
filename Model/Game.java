@@ -7,12 +7,12 @@ import java.util.concurrent.TimeUnit;
 public class Game
 {
     private Board tempBoard;
+    private ArrayList<String> finalSet;
     private int beaconFlag = -1;
-    private randomAgent agent;
 
-    public Game(int nDimension) {            //Agent PARAMETER soon.
+    public Game(int nDimension) {
         tempBoard = new Board(nDimension);
-        agent = new randomAgent();
+        finalSet = new ArrayList<>();
     }
 
     /*
@@ -20,26 +20,34 @@ public class Game
     * */
     public void play()
     {
-        Scanner kb = new Scanner(System.in);
-
+        testIDS randomAgent = new testIDS(tempBoard, 16);
+        ArrayList<Point> pathChosen;
         int pitFlag = 0;
         tempBoard.display();
 
-        String input = "";
-        while( !(input.contains("QUIT")) )
-        {
-            input = agent.randomMove();
-            if(input.length() < 2 || input.compareToIgnoreCase("rotate") == 0 || input.compareToIgnoreCase("scan") == 0)
-                action(input);
-            if(!isGameOver())
+        testNode initialNode = new testNode(0,0);
+            initializeAdjacent(randomAgent,initialNode);
+            pathChosen = randomAgent.IDS(initialNode);
+        for (int i = 0; i < pathChosen.size(); i++) {
+            System.out.println(pathChosen.get(i).x+" "+pathChosen.get(i).y);
+            action(pathChosen.get(i));
+
+            //If you want to see it Slowly.
+            /*try {
+                TimeUnit.SECONDS.sleep(1);
+            }
+            catch (InterruptedException e) {
+                e.printStackTrace();
+            }*/
+
+            if (!isGameOver())
                 break;
-            //If yung natapakan ni Player is true yung pit: Game over.
-            if(tempBoard.isPit()){
+
+            if (tempBoard.isPit()) {
                 pitFlag = 1;
                 break;
             }
         }
-
         if(pitFlag == 1)
             System.out.println("Russian Man: You Failed me. *Shoots*");
         else {
@@ -60,6 +68,7 @@ public class Game
             }
         }
     }
+
     /* Given the desired direction, check if the move is valid
         if it is, update the board. All change in positions
         must be accounted for and reflected in the Board.
@@ -129,20 +138,65 @@ public class Game
             if(flag != 1)
                 tempBoard.updatePos(xCoord, yCoord, "*");
 
+            finalSet.add(dir);
             //Updates the Current Location of Miner.
             tempBoard.setpMinerCurrCoordinate(tempBoard.boardFind("A"));
             tempBoard.display();
         }
         //Agent uses scan.
-        else if(dir.contains("S") || dir.contains("Scan") || dir.contains("scan"))
+        else if(dir.contains("S") || dir.contains("Scan") || dir.contains("scan")) {
             System.out.println(tempBoard.scan());
+            finalSet.add("Scan");
+        }
         //Agent uses rotate.
         else if(dir.contains("Rotate") || dir.contains("rotate")) {
             tempBoard.rotate();
             System.out.println("Current Direction "+tempBoard.getMinerDirection());
+            finalSet.add("Rotate");
         }
         else
             System.out.println("Russian Man: Invalid Move, Comrade.");
+    }
+
+    /* Given the desired Point, Find the right direction/action
+        and use the previous definition of action().
+        @param dir - desired Point
+     */
+    public void action(Point dir)
+    {
+        int counter = 0;
+        int xCoord = -1,yCoord = -1;
+        String direction;
+
+        //Find the Current Position of the Agent.
+        Point coords = tempBoard.boardFind("A");
+
+        // Take the x and y
+        if(coords.x != -1) {
+            xCoord = coords.x;
+            yCoord = coords.y;
+        }
+
+        //Determine direction of point
+        if(dir.x == xCoord - 1)
+            direction = "U";
+        else if(dir.x == xCoord + 1)
+            direction = "D";
+        else if(dir.y == yCoord - 1)
+            direction = "L";
+        else if(dir.y == yCoord + 1)
+            direction = "R";
+        else
+            direction = "S";
+
+        while(!validMove(direction,xCoord,yCoord)) {
+            tempBoard.rotate();
+            finalSet.add("Rotate");
+            counter++;      //To prevent an infinite loop.
+            if(counter>6)
+                break;
+        }
+        action(direction);
     }
 
     /*
@@ -158,21 +212,24 @@ public class Game
     {
         boolean flag = false;
         if(dir.contains("U") && tempBoard.getMinerDirection().contains("U")) {
-            if((x - 1 < 8 && x-1 >= 0))
+            if((x - 1 < tempBoard.getMAX_DIMENSION() && x-1 >= 0))
                 flag = true;
         }
         else if(dir.contains("D") && tempBoard.getMinerDirection().contains("D")){
-            if((x + 1 < 8 && x + 1 >= 0))
+            if((x + 1 < tempBoard.getMAX_DIMENSION() && x + 1 >= 0))
                 flag = true;
         }
         else if(dir.contains("L") && tempBoard.getMinerDirection().contains("L")){
-            if((y - 1 < 8 && y-1 >= 0))
+            if((y - 1 < tempBoard.getMAX_DIMENSION() && y-1 >= 0))
                 flag = true;
         }
         else if(dir.contains("R") && tempBoard.getMinerDirection().contains("R") && dir.compareToIgnoreCase("rotate") != 0){
-            if((y + 1 < 8 && y + 1 >= 0))
+            if((y + 1 < tempBoard.getMAX_DIMENSION() && y + 1 >= 0))
                 flag = true;
         }
+        else if(dir.contains("Scan"))
+            flag = true;
+
         return flag;
     }
 
@@ -190,14 +247,21 @@ public class Game
         return false;
     }
 
+    /*Purpose of this method is to solely initialize the adjacent points of the initial node.
+    *
+    * @param thisAgent - Random Agent using IDS.
+    * @param initialNode - initial position of the player.
+    * */
+    public void initializeAdjacent(testIDS thisAgent, testNode initialNode)
+    {
+        ArrayList<Point> adjacentNodes = new ArrayList<>();
+        adjacentNodes.add(new Point(0,1));
+        adjacentNodes.add(new Point(1,0));
+        thisAgent.setAdjacentNodes(adjacentNodes,initialNode);
+    }
+
     public static void main(String[] args) {
         Game thisGame = new Game(8);
         thisGame.play();
-
-       // Random test = new Random();
-/*
-        for (int i = 0; i <100 ; i++)
-            System.out.println("Random Move: "+thisGame.randomAgent());*/
-
     }
 }
