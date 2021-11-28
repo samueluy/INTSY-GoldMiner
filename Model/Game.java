@@ -1,5 +1,9 @@
+package Model;
+
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+import Model.Smart;
+import View.Board;
 
 public class Game
 {
@@ -127,16 +131,40 @@ public class Game
     public static void main(String[] args) {
         Game gg = new Game();
         Scanner kb = new Scanner(System.in);
+        String strPlayerType = "SMART";
+        int nMaxDimension = 8;
 
         String input = "";
-        gg.display();
-        while( !(input.contains("QUIT")) )
+        if(strPlayerType.equals("RANDOM"))
         {
-            input = kb.nextLine();
-            if(input.length() < 2) {
-                gg.action(input);
+            gg.display();
+            while( !(input.contains("QUIT")) )
+            {
+                input = kb.nextLine();
+                if(input.length() < 2) {
+                    gg.action(input);
+                }
             }
         }
+        else if(strPlayerType.equals("SMART"))
+        {
+            Board brdBoard = new Board(nMaxDimension);
+            Smart sSmartAgent = new Smart(nMaxDimension);
+            char cInput;
+            while(brdBoard.executeAction(sSmartAgent.aStar()).equals("M,GOLD"))
+            {
+               
+                if( ) {
+                   
+                    brdBoard.executeAction(sSmartAgent.aStar());
+                }
+            }
+        }
+        else
+        {
+
+        }
+        
 
         /*Keep it for now HAHA*/
         try {
