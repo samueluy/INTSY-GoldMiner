@@ -123,7 +123,7 @@ class Board
             if (   arrCells[pCoordinate.x][pCoordinate.y].isFreeTerrain()
                     &&  !arrCells[pCoordinate.x][pCoordinate.y].isMiner())  //If the miner is not in the cell
             {
-                arrCells[pCoordinate.x][pCoordinate.y].setBeacon(pGoldCoordinate);
+                arrCells[pCoordinate.x][pCoordinate.y].setBeacon(pMinerCurrCoordinate, pGoldCoordinate);
                 bValid = true; // STOP the loop
             }
         }while(!bValid);
@@ -320,6 +320,7 @@ class Board
                 break;
         }
     }
+
 
     public String getMinerDirection() {return minerDirection;}
 }

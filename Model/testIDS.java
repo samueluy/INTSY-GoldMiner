@@ -7,10 +7,11 @@ import java.util.ArrayList;
 
 public class testIDS
 {
-    public static int MAX_DEPTH;
-    public Board currentBoard;
-    public boolean flagForPath;
-    ArrayList<Point> pathChosen;
+    private static int MAX_DEPTH;
+    private Board currentBoard;
+    private boolean flagForPath;
+    private ArrayList<Point> pathChosen;
+    private int nBacktrack;
 
     public testIDS(Board board,int depth)
     {
@@ -96,15 +97,21 @@ public class testIDS
     * */
     public void backtrack(testNode currentNode)
     {
+        nBacktrack+=1;
         if(currentNode.getParentNode()!= null)
             pathChosen.add(currentNode.getNodeLocation());
     }
-    /* Given the current location of the agent,
-        find the adjacent nodes possible. Excluding the previous location.
 
-        @param currentLocation - Current point of Agent.
-        @param pastLocation - Previous Point coordinate of agent.
-    * */
+    public int getBacktrack() {
+        return nBacktrack;
+    }
+
+    /* Given the current location of the agent,
+            find the adjacent nodes possible. Excluding the previous location.
+
+            @param currentLocation - Current point of Agent.
+            @param pastLocation - Previous Point coordinate of agent.
+        * */
     public testNode getAdjacent(Point currentLocation,Point pastLocation)
     {
         ArrayList<Point> adjacentNodes = new ArrayList();
