@@ -435,6 +435,33 @@ public class Board
     }
     
     /**
+     * Gets the String value of what tile kind of tile is placed in the cell
+     * @param cCell Cell to be checked
+     * @return String:  BEACON if cell is set to be beacon
+     *                  PIT if cell is set to be pit
+     *                  GOLD if cell is set to be gold
+     */
+    private String getTileName(Cell cCell)
+    {
+        if(cCell.isBeacon() != -1)
+        {
+            return "BEACON";
+        }
+        else if (cCell.isPit())
+        {
+            return "PIT";
+        }
+        else if (cCell.isGold())
+        {
+            return "GOLD";
+        }
+        else
+        {
+            return null;
+        }
+    } 
+    
+    /**
      * Rotates the direction of the Miner
      */
     private void smartRotate ()
