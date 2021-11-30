@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class Smart {
-    private String strActionHistory; // History of all actions made. For verifiability.
+    private String strActionHistory; // History of all actions made. For verifiability.For Debugging.
     private int nPathCostCtr; // Path cost by the miner -Documentation Purposes
     private int nDepthCtr; // Depth of the tree for documentation purposes
     private int nActionsCombinedCount;
@@ -27,30 +27,47 @@ public class Smart {
         this.hbCurrHeuristicBoard = new HeuristicBoard(this.nMaxDimension);
     }
 
+    /**
+     * Get the Accumulated Path Cost of the all moves 
+     * @param int count of accumulated path cost
+     */
     public int getPathCost ()
     {
         return this.nPathCostCtr;
     }
 
+    /**
+     * Get current depth of the A* Search
+     * @param int current depth of A* Search
+     */
     public int getDepth ()
     {
         return this.nDepthCtr;
     }
 
+    /**
+     * Get number of actions to be combined
+     * @param int number of actions to be combined
+     */
     public int getActionsCombinedCount ()
     {
         return this.nActionsCombinedCount;
     }
 
+    /**
+     * Generates the best action basing in the current state of the HeuristicBoard by choosing the best first action in the combination of nActionsCombinedCount 
+     * @param char the action in a given HeuristicBoard
+     */
     public char aStar()
     {
         char cTriedAction; 
         char cBestAction= 'R';// Default Action to be retured is Rotate. Requires by java to have default value
         double nAccumulatedHeuristicCtr;
-        double nBestAccumulatedHeuristic = -99999;
+        double nBestAccumulatedHeuristic = -99999; // -999999 since there will be negative tiles later after scanning a PIT Tile
         int rows = (int) Math.pow(MAX_POSSIBLE_ACTIONS,nActionsCombinedCount);
         boolean bValid;
         char cTestBestFirstAction = 'R'; // R because Non-desruptive deault action. Requires by java to have default value
+        
         // Loop to generate all combinations
         for (int i=0; i<rows ; i++) 
         {
@@ -85,6 +102,7 @@ public class Smart {
                         System.out.println("ERROR: A* Switch Case");
                         break;
                 };
+                
                 // Check if valid Action
                 if(     cTriedAction != 'M' // If NOT Move Action no need to check
                     ||  isValidAction(hbTempHeuristicBoard))  // If Move Action, check if valid
@@ -118,7 +136,7 @@ public class Smart {
             if(     nAccumulatedHeuristicCtr > nBestAccumulatedHeuristic
                 &&  bValid)
             {
-                nBestAccumulatedHeuristic = nAccumulatedHeuristicCtr;
+                nBestAccumulatedHeuristic = nAccumulatedHeuristicCtr; // Store the NEW HIGHEST Accumulated Heuristic
                 cBestAction = cTestBestFirstAction; // Store the first move of the combination
             }
             
@@ -132,17 +150,25 @@ public class Smart {
         return cBestAction;
     }
 
+    /**
+     * NOTE: This method assumes that the acion to be done is MOVE
+     * Checks if the move action will place the Miner inside the Board nMaxDimension 
+     * AND there is a miner to be moved
+     * @param boolean true if valid, otherwise false
+     */
     private boolean isValidAction (HeuristicBoard hbTempHeuristicBoard)
     {
         boolean bValidAction = true;
+        
         // No Miner in the Curr Cell
         if(hbTempHeuristicBoard.getArrCell()[hbTempHeuristicBoard.getMinerCurrCoordinate().x][hbTempHeuristicBoard.getMinerCurrCoordinate().y].getMiner() == null)
         {
             bValidAction = false;
         }
-        // Check if the action is move
+        // Checks if move will place miner within the max dimension of the board
         else
         {
+            // key is the Direction of the Miner
             switch(hbTempHeuristicBoard.getArrCell()[hbTempHeuristicBoard.getMinerCurrCoordinate().x][hbTempHeuristicBoard.getMinerCurrCoordinate().y].getMiner().getDirection())
             {
 
@@ -165,6 +191,10 @@ public class Smart {
 
         return bValidAction;
     }
+    
+    /**
+     * Updates the MAIN Heuristic Board base from the action DONE of the SMART AGENT
+     */
     public void updateHeuristicBoard(String strActionOutput) 
     {
         hbCurrHeuristicBoard.updateHeuristicBoard(strActionOutput);
