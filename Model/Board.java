@@ -507,7 +507,6 @@ class Board
         // No Miner in the Curr Cell
         if(cMinerCurrCell.getMiner() == null)
         {
-            System.out.println("cMinerCurrCell.getMiner() == null");
             bValidAction = false;
         }
         // Check if the action is move
