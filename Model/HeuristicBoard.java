@@ -362,7 +362,6 @@ public class HeuristicBoard implements Cloneable{
         // Check if Beacon Tile
         if(isNumeric(strMoveInfo) && Integer.parseInt(strMoveInfo) != -1)
         {
-            System.out.println("strMoveInfo "+ strMoveInfo);
             moveToBeaconUpdate(Integer.parseInt(strMoveInfo));
         }
     }
