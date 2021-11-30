@@ -33,6 +33,41 @@ public class Controller implements ActionListener{
         gui = new GUI(modelMainMenu);
         gui.setActionListeners(this);
     }
+    
+    /**
+    *   starts the the Smart Agent to Play the game.
+    */
+    public void smartPlay ()
+    {
+        Board brdBoard = new Board(nMaxDimension);
+        Smart sSmartAgent = new Smart(nMaxDimension);
+        String strActionOutput = new String();
+        char cAction;
+
+        do 
+        {
+            brdBoard.display();
+            cAction = sSmartAgent.aStar(); // Store Best Action
+                    
+            strActionOutput = brdBoard.executeAction(cAction); // Execute Action and Store Action return information
+            strActionHistory = strActionHistory + cAction; // Store Action Done to The history of actions
+            sSmartAgent.updateHeuristicBoard(strActionOutput); // Update the Heuristic board with the return information of the action
+  
+            // If Win
+            if(strActionOutput.equals("M,GOLD")) 
+            {
+                bWin = true;
+                break;
+            }
+            
+            // If Lose
+            else if (strActionOutput.equals("M,PIT"))
+            {
+                bGameOver = true;
+                break;
+            }
+        }while(!bGameOver && !bWin);
+    }
 
     /** 
     * This function listens to the GUI buttons with an ActionListener and
