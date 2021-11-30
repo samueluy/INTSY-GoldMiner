@@ -2,7 +2,7 @@ package Model;
 import java.util.Random;
 import java.awt.Point;
 
-class Board
+public class Board
 {
     private Cell[][] arrCells; // BOARD
     private static int MAX_DIMENSION = 8;
