@@ -321,7 +321,6 @@ class Board
         }
     }
 
-
     public String getMinerDirection() {return minerDirection;}
     
     /**
@@ -354,10 +353,10 @@ class Board
                     strReturn = "M," + move();
                     break;
                 case 'S':
-                    strReturn = "S," + scan();
+                    strReturn = "S," + smartScan();
                     break;
                 case 'R':
-                    rotate();
+                    smartRotate();
                     
                     strReturn = "R";
                     break;
@@ -365,6 +364,82 @@ class Board
         }
 
         return strReturn;
+    }
+    
+    /**
+     * Scans the COLUMN OR COLUMN base on the location of the miner and direction where the miner is facing
+     * @return String:  PIT if it scanned pit tile,
+     *                  BEACON if it scanned BEACON,
+     *                  GOLD if it scanned GOLD,
+     *                  Otherwise, NULL
+     */
+    private String smartScan ()
+    {   
+        String strReturn = "NONE"; 
+        switch(arrCells[pMinerCurrCoordinate.x][pMinerCurrCoordinate.y].getMiner().getDirection())
+        {
+            // SCANS DOWN
+            case "DOWN":
+                for (int i = pMinerCurrCoordinate.x + 1; i < MAX_DIMENSION; i++)
+                {
+                    strReturn = getTileName(arrCells[i][pMinerCurrCoordinate.y]);
+                    // Checks if the tile is a SPECIAL Tile 
+                    if (strReturn!= null)
+                    {
+                        // END FOR-LOOP
+                        i = MAX_DIMENSION;
+                    }
+                }
+                break;
+            // SCANS LEFT
+            case "UP":
+                for (int i = pMinerCurrCoordinate.x - 1; i >= 0; i--)
+                {
+                    strReturn = getTileName(arrCells[i][pMinerCurrCoordinate.y]);
+                    // Checks if the tile is a SPECIAL Tile 
+                    if (strReturn!= null)
+                    {
+                        // END FOR-LOOP
+                        i = 0;
+                    }
+                }
+                break;
+            // SCANS UPWARD
+            case "LEFT":
+                for (int i = pMinerCurrCoordinate.y - 1; i >= 0; i--)
+                {
+                    strReturn = getTileName(arrCells[pMinerCurrCoordinate.x][i]);
+                    // Checks if the tile is a SPECIAL Tile 
+                    if (strReturn!= null)
+                    {
+                        // END FOR-LOOP
+                        i = 0;
+                    }
+                }
+                break;
+            case "RIGHT":
+                for (int i = pMinerCurrCoordinate.y + 1; i < MAX_DIMENSION; i++)
+                {
+                    strReturn = getTileName(arrCells[pMinerCurrCoordinate.x][i]);
+                    // Checks if the tile is a SPECIAL Tile 
+                    if (strReturn!= null)
+                    {
+                        // END FOR-LOOP
+                        i = MAX_DIMENSION;
+                    }
+                }
+                break;
+        }
+
+        return strReturn;
+    }
+    
+    /**
+     * Rotates the direction of the Miner
+     */
+    private void smartRotate ()
+    {
+        arrCells[pMinerCurrCoordinate.x][pMinerCurrCoordinate.y].getMiner().rotate();
     }
     
     /**
