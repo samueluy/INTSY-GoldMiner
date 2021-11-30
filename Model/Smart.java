@@ -29,7 +29,7 @@ public class Smart {
 
     /**
      * Get the Accumulated Path Cost of the all moves 
-     * @param int count of accumulated path cost
+     * @return int count of accumulated path cost
      */
     public int getPathCost ()
     {
@@ -38,7 +38,7 @@ public class Smart {
 
     /**
      * Get current depth of the A* Search
-     * @param int current depth of A* Search
+     * @return int current depth of A* Search
      */
     public int getDepth ()
     {
@@ -47,7 +47,7 @@ public class Smart {
 
     /**
      * Get number of actions to be combined
-     * @param int number of actions to be combined
+     * @return int number of actions to be combined
      */
     public int getActionsCombinedCount ()
     {
@@ -56,7 +56,7 @@ public class Smart {
 
     /**
      * Generates the best action basing in the current state of the HeuristicBoard by choosing the best first action in the combination of nActionsCombinedCount 
-     * @param char the action in a given HeuristicBoard
+     * @return char the action in a given HeuristicBoard
      */
     public char aStar()
     {
@@ -154,7 +154,8 @@ public class Smart {
      * NOTE: This method assumes that the acion to be done is MOVE
      * Checks if the move action will place the Miner inside the Board nMaxDimension 
      * AND there is a miner to be moved
-     * @param boolean true if valid, otherwise false
+     * @param HeuristicBoard hbTempHeuristicBoard board to be check where if the miner move is valid
+     * @return boolean true if valid, otherwise false
      */
     private boolean isValidAction (HeuristicBoard hbTempHeuristicBoard)
     {
