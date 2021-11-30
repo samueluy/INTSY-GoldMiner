@@ -5,23 +5,28 @@ import javax.swing.*;
 
 public class Counters{
     private JFrame frame;
-    private JLabel lblLvlOfIntelligence;
     private JLabel lblScans;
     private JLabel lblMoves;
     private JLabel lblRotates;
+    private JLabel lblPathCost;
     private JButton btnStart;
+    private JButton btnGo;
+    private JButton btnQuit;
 
     public Counters(String lvl){
         frame = new JFrame(lvl);
-        frame.setSize(new Dimension(288, 480));
+        frame.setSize(new Dimension(288, 768));
         frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         frame.setResizable(false);
         frame.getContentPane().setBackground(GUI.PICKLED_BLUEWOOD);
-        lblScans = new JLabel("Scans: ");
         lblMoves = new JLabel("Moves: ");
+        lblScans = new JLabel("Scans: ");
         lblRotates = new JLabel("Rotates: ");
+        lblPathCost = new JLabel("Path Cost = ");
         btnStart = new JButton("Start Mining");
+        btnGo = new JButton("Go");
+        btnQuit = new JButton("Quit");
         setUpCounters();
         frame.setVisible(false);
     }
@@ -30,18 +35,24 @@ public class Counters{
         return btnStart;
     }
 
+    public JButton getGoBtn(){
+        return btnGo;
+    }
+
+    public JButton getQuitBtn(){
+        return btnQuit;
+    }
+
     private void setUpCounters(){
         frame.add(Box.createRigidArea(new Dimension(0, 30)));
         alterLbl(lblMoves);
         alterLbl(lblRotates);
         alterLbl(lblScans);
+        alterLbl(lblPathCost);
         frame.add(Box.createRigidArea(new Dimension(0, 30)));
-        btnStart.setFont(new Font(Font.SANS_SERIF, Font.ITALIC, 18));
-        btnStart.setBackground(GUI.MING);
-        btnStart.setForeground(Color.white);
-        btnStart.setUI(new StyledButtonUI(15,20,15,20));
-        btnStart.setAlignmentX(Component.CENTER_ALIGNMENT);
-        frame.add(btnStart);
+        alterButton(btnStart);
+        alterButton(btnGo);
+        alterButton(btnQuit);
     }
 
     //should be disabled later
@@ -58,10 +69,31 @@ public class Counters{
     public void updateLvl(String str){
         frame.setTitle(str);
         frame.setVisible(true);
+        updateCounters(0, 0, 0, 0);
     }
-    //update method
 
-    /*public static void main(String[] args){
-        Counters trial = new Counters("Random Behavior");
-    }*/
+    public void updateCounters(int nMoves, int nScans, int nRotates, int nPathCost)
+    {
+        lblMoves.setText("Moves: " + nMoves);
+        lblScans.setText("Scans: " + nScans);
+        lblRotates.setText("Rotates: " + nRotates);
+        lblPathCost.setText("Path Cost = " + nPathCost);
+    }
+
+    //update method-test what will happen to frame after game finishes
+    public void closeCounterFrame()
+    {
+        frame.setVisible(false);
+    }
+
+    private void alterButton(JButton btn)
+    {
+        btn.setFont(new Font(Font.SANS_SERIF, Font.ITALIC, 18));
+        btn.setBackground(GUI.MING);
+        btn.setForeground(Color.white);
+        btn.setUI(new StyledButtonUI(15,20,15,20));
+        btn.setAlignmentX(Component.CENTER_ALIGNMENT);
+        frame.add(btn);
+        frame.add(Box.createRigidArea(new Dimension(0, 15)));
+    }
 }

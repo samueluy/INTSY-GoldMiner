@@ -4,7 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.*;
 
-public class MainMenu extends JPanel{
+//represents a MainMenu class(includes all buttons that can be clicked on the MainMenu)
+public class MainMenu extends JPanel
+{
     private JLabel  lblTitle;
     private ImageIcon imgTitle = new ImageIcon("Lib/utilities/Title.png");
     private ImageIcon imgStartBtn = new ImageIcon("Lib/utilities/StartBtn.png");
@@ -16,7 +18,8 @@ public class MainMenu extends JPanel{
     private JButton btnSoundSettings;
     private JButton btnExitAI;
 
-    public MainMenu(){
+    public MainMenu()
+    {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBorder(new EmptyBorder(new Insets(96, 48, 48, 48)));
         this.setPreferredSize(GUI.SYSTEM_SIZE);
@@ -32,23 +35,33 @@ public class MainMenu extends JPanel{
         setUpMainMenu();
     }
 
-    public JButton getBtnStartAI(){
+    //returns StartAISystem button so an ActionListener can be added to it
+    public JButton getBtnStartAI()
+    {
         return btnStartAI;
     }
 
-    public JButton getBtnAboutGoldMiner(){
+    //returns AboutGoldMiner button so an ActionListener can be added to it
+    public JButton getBtnAboutGoldMiner()
+    {
         return btnAboutGoldMiner;
     }
 
-    public JButton getBtnSoundSettings(){
+    //returns SoundSettings button so an ActionListener can be added to it
+    public JButton getBtnSoundSettings()
+    {
         return btnSoundSettings;
     }
 
-    public JButton getBtnExitAI(){
+    ////returns ExitAISystem button so an ActionListener can be added to it
+    public JButton getBtnExitAI()
+    {
         return btnExitAI;
     }
 
-    private void setUpMainMenu(){
+    //customizes the title and buttons that can be seen on the MainMenu
+    private void setUpMainMenu()
+    {
         lblTitle.setBackground(GUI.TARAWERA);
         lblTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.add(lblTitle);
@@ -59,7 +72,9 @@ public class MainMenu extends JPanel{
         alterButton(btnExitAI, imgExitBtn);
     }
 
-    private void alterButton(JButton btn, ImageIcon img){
+    //customizes the buttons that can be see on the MainMenu
+    private void alterButton(JButton btn, ImageIcon img)
+    {
         btn.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 2));
         btn.setIcon(img);
         btn.setBackground(GUI.SPRING_LEAVES);

@@ -10,7 +10,8 @@ public class testIDS
     public static int MAX_DEPTH;
     public Board currentBoard;
     public boolean flagForPath;
-    ArrayList<Point> pathChosen;
+    private int backTracks = 0;
+    private ArrayList<Point> pathChosen;
 
     public testIDS(Board board,int depth)
     {
@@ -18,6 +19,16 @@ public class testIDS
         pathChosen = new ArrayList<>();
         flagForPath = false;
         MAX_DEPTH = depth;
+    }
+
+    public int getNumBackTracks()
+    {
+        return backTracks;
+    }
+
+    public ArrayList<Point> getPathChosen()
+    {
+        return pathChosen;
     }
 
     /* Given the initial node, this method performs DLS
@@ -96,6 +107,7 @@ public class testIDS
     * */
     public void backtrack(testNode currentNode)
     {
+        backTracks++;
         if(currentNode.getParentNode()!= null)
             pathChosen.add(currentNode.getNodeLocation());
     }

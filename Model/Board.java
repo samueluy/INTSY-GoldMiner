@@ -2,7 +2,7 @@ package Model;
 import java.util.Random;
 import java.awt.Point;
 
-class Board
+public class Board
 {
     private Cell[][] arrCells; // BOARD
     private static int MAX_DIMENSION = 8;
@@ -123,7 +123,7 @@ class Board
             if (   arrCells[pCoordinate.x][pCoordinate.y].isFreeTerrain()
                     &&  !arrCells[pCoordinate.x][pCoordinate.y].isMiner())  //If the miner is not in the cell
             {
-                arrCells[pCoordinate.x][pCoordinate.y].setBeacon(pGoldCoordinate);
+                arrCells[pCoordinate.x][pCoordinate.y].setBeacon(pMinerCurrCoordinate, pGoldCoordinate);
                 bValid = true; // STOP the loop
             }
         }while(!bValid);
@@ -322,4 +322,13 @@ class Board
     }
 
     public String getMinerDirection() {return minerDirection;}
+
+    public Cell getCell(Point coordinates)
+    {
+        return arrCells[(int)coordinates.getX()][(int)coordinates.getY()];
+    }
+
+    public Point getMinerCoordinates(){
+        return pMinerCurrCoordinate;
+    }
 }
