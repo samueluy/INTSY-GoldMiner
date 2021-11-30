@@ -13,6 +13,10 @@ public class Smart {
     private HeuristicBoard hbCurrHeuristicBoard; // Current heuristic board to be proccessed.
     private PrintWriter fFileWriter;
 
+    /**
+     * Constructs a Smart Class
+     * @param nMaxDimension the dimension of the HeuristicBoard smart will generate 
+     */
     public Smart(int nMaxDimension)
     {
         this.strActionHistory = new String();
@@ -21,11 +25,6 @@ public class Smart {
         this.nMaxDimension = nMaxDimension;
         this.nActionsCombinedCount = 7;  // Estimate count of actions needed to scan the while board ;(this.nMaxDimension)
         this.hbCurrHeuristicBoard = new HeuristicBoard(this.nMaxDimension);
-    }
-
-    public String getActionHistory ()
-    {
-        return this.strActionHistory;
     }
 
     public int getPathCost ()
