@@ -44,9 +44,9 @@ public class Controller implements ActionListener{
         String strActionOutput = new String();
         char cAction;
 
+        // Loop until Agent Wins OR Loses
         do 
         {
-            brdBoard.display();
             cAction = sSmartAgent.aStar(); // Store Best Action
                     
             strActionOutput = brdBoard.executeAction(cAction); // Execute Action and Store Action return information
@@ -59,7 +59,6 @@ public class Controller implements ActionListener{
                 bWin = true;
                 break;
             }
-            
             // If Lose
             else if (strActionOutput.equals("M,PIT"))
             {
