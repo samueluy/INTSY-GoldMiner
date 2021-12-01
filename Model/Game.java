@@ -163,7 +163,7 @@ public class Game
                     gui.showJOptionPane(GUI.imgMessage, "Beacon Hint: " + gameBoard.getHint(xCoord - 1, yCoord));
                     beaconFlag = 0;
                 }
-                gameBoard.updatePos(xCoord - 1, yCoord, "A");
+                gameBoard.updatePos(xCoord, yCoord, xCoord - 1, yCoord, dir);
             }
 
             else if (dir.contains("D")) {
@@ -172,7 +172,7 @@ public class Game
                     gui.showJOptionPane(GUI.imgMessage, "Beacon Hint: " + gameBoard.getHint(xCoord + 1, yCoord));
                     beaconFlag = 0;
                 }
-                gameBoard.updatePos(xCoord + 1, yCoord, "A");
+                gameBoard.updatePos(xCoord, yCoord, xCoord + 1, yCoord, dir);
             }
 
             else if (dir.contains("L")) {
@@ -181,7 +181,7 @@ public class Game
                     gui.showJOptionPane(GUI.imgMessage, "Beacon Hint: " + gameBoard.getHint(xCoord, yCoord - 1));
                     beaconFlag = 0;
                 }
-                gameBoard.updatePos(xCoord, yCoord - 1, "A");
+                gameBoard.updatePos(xCoord, yCoord, xCoord, yCoord - 1, dir);
             }
 
             else if (dir.contains("R")) {
@@ -190,7 +190,7 @@ public class Game
                     gui.showJOptionPane(GUI.imgMessage, "Beacon Hint: " + gameBoard.getHint(xCoord, yCoord + 1));
                     beaconFlag = 0;
                 }
-                gameBoard.updatePos(xCoord, yCoord + 1, "A");
+                gameBoard.updatePos(xCoord, yCoord, xCoord, yCoord + 1, dir);
             }
 
             if(flag != 1)
