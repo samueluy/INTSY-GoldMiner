@@ -46,6 +46,11 @@ public class Cell {
         strSymbol = "A";
     }
 
+    public void setMiner(String direction) {
+        this.mMiner = new Miner(direction);
+        strSymbol = "A";
+    }
+
     public void setMiner(Miner miner) {
         this.mMiner = miner;
     }
