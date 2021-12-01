@@ -259,13 +259,13 @@ public class Game
         else
         {
             direction = "S";
-            System.out.println("outsideeeeeeeeeeeeeeee" + dir);
+            //System.out.println("outsideeeeeeeeeeeeeeee" + dir);
         }
 
         while(isValidMoveRandom(direction,xCoord,yCoord)) {
             gameBoard.rotate();
             gameBoard.smartRotate();
-            System.out.println("insideeeeeeeeeeeeee" + direction);
+            //System.out.println("insideeeeeeeeeeeeee" + direction);
             gui.updateMiner(gameBoard);
             finalSetRandom.add(randomAgent.rotate());
             randomAgent.addToPathCost();
