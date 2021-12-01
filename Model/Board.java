@@ -194,17 +194,16 @@ public class Board
      * */
     public void updatePos(int x, int y,String toUpdate)
     {
-        //For Miner
         arrCells[x][y].setStrSymbol(toUpdate);
     }
-    
-    public void updatePos(int curX, int curY, int nextX, int nextY)
+
+    public void updatePos(int curX, int curY, int nextX, int nextY, String direction)
     {
     	// update miner position
-        arrCells[nextX][nextY].setMiner();
+        arrCells[nextX][nextY].setMiner(direction);
         arrCells[curX][curY].removeMiner();
     }
-    
+
     public void setpMinerCurrCoordinate(Point update)
     {
         pMinerCurrCoordinate = update;
