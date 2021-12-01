@@ -202,6 +202,9 @@ public class Board
     	// update miner position
         arrCells[nextX][nextY].setMiner(direction);
         arrCells[curX][curY].removeMiner();
+
+        //
+        setpMinerCurrCoordinate(new Point(nextX, nextY));
     }
 
     public void setpMinerCurrCoordinate(Point update)
@@ -478,7 +481,7 @@ public class Board
     /**
      * Rotates the direction of the Miner
      */
-    private void smartRotate ()
+    public void smartRotate ()
     {
         arrCells[pMinerCurrCoordinate.x][pMinerCurrCoordinate.y].getMiner().rotate();
     }

@@ -145,7 +145,7 @@ public class Game
         //Check if the move is valid.
         if(isValidMoveRandom(dir,xCoord,yCoord))
         {
-            
+            gui.updateMiner(gameBoard);
             //Beaconflag is for restoring the beacon when player leaves it.
             if(beaconFlag == 0)
             {
@@ -202,12 +202,11 @@ public class Game
             //Updates the Current Location of Miner.
             gameBoard.setpMinerCurrCoordinate(gameBoard.boardFind("A"));
             //gameBoard.display();
-            gui.updateMiner(gameBoard);
+            
         }
         //Agent uses scan.
         else if(dir.contains("S") || dir.contains("Scan") || dir.contains("scan")) {
             //System.out.println(gameBoard.scan());
-            gui.updateMiner(gameBoard);
             gui.showJOptionPane(GUI.imgMessage, "Scanned: " + gameBoard.scan());
             nScans++;
             gui.updateMiner(gameBoard);
@@ -215,15 +214,15 @@ public class Game
             randomAgent.addToPathCost();
         }
         //Agent uses rotate.
-        else if(dir.contains("Rotate") || dir.contains("rotate")) {
-            gui.updateMiner(gameBoard);
-            gameBoard.rotate();
-            nRotates++;
-            gui.updateMiner(gameBoard);
-            //System.out.println("Current Direction "+gameBoard.getMinerDirection());
-            finalSetRandom.add(randomAgent.rotate());
-            randomAgent.addToPathCost();
-        }
+        // if(dir.contains("R") || dir.contains("rotate")) {
+        //    //gameBoard.rotate();
+        //    gameBoard.rotate();
+        //    gameBoard.smartRotate();
+        //    //System.out.println("Current Direction "+gameBoard.getMinerDirection());
+        //    finalSetRandom.add(randomAgent.rotate());
+        //    randomAgent.addToPathCost();
+        //}
+        //System.out.println("==============="+dir);
         //else
         //    System.out.println("Russian Man: Invalid Move, Comrade.");
     }
@@ -234,6 +233,7 @@ public class Game
      */
     public void actionRandom(Point dir, GUI gui)
     {
+        gui.updateMiner(gameBoard);
         int counter = 0;
         int xCoord = -1,yCoord = -1;
         String direction;
@@ -257,11 +257,15 @@ public class Game
         else if(dir.y == yCoord + 1)
             direction = "R";
         else
+        {
             direction = "S";
+            System.out.println("outsideeeeeeeeeeeeeeee" + dir);
+        }
 
-        while(!isValidMoveRandom(direction,xCoord,yCoord)) {
-            gui.updateMiner(gameBoard);
+        while(isValidMoveRandom(direction,xCoord,yCoord)) {
             gameBoard.rotate();
+            gameBoard.smartRotate();
+            System.out.println("insideeeeeeeeeeeeee" + direction);
             gui.updateMiner(gameBoard);
             finalSetRandom.add(randomAgent.rotate());
             randomAgent.addToPathCost();

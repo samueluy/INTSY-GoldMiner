@@ -5,11 +5,11 @@ public class Miner {
 
     public Miner(){
         this.strDirection = "RIGHT";
-    }
+    } 
     
     public Miner(String strDirection)
     {
-        this.strDirection =strDirection;
+        this.strDirection = strDirection;
     }
     
     public String getDirection(){
