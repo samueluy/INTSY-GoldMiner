@@ -46,8 +46,39 @@ public class Cell {
         strSymbol = "A";
     }
 
+    public void setGold(String update) {
+        this.bGold = true;
+        this.nBeacon = -1;
+        this.bPit = false;
+        this.mMiner = null;
+    }
+
+    public void setPit(String update) {
+        this.bPit = true;
+        this.nBeacon = -1;
+        this.bGold = false;
+        this.mMiner = null;
+    }
+
+    public void setMiner(String update) {
+        this.mMiner = new Miner();
+        this.nBeacon = -1;
+        this.bGold = false;
+        this.bPit = false;
+    }
+
     public void setMiner(Miner miner) {
         this.mMiner = miner;
+        strSymbol = "*";
+    }
+
+    public void newCell()
+    {
+        this.nBeacon = -1;
+        this.bGold = false;
+        this.bPit = false;
+        this.mMiner = null;
+        strSymbol = "*";
     }
 
     public void removeMiner() {

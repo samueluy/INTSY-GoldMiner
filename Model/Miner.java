@@ -2,15 +2,20 @@ package Model;
 
 public class Miner {
     private String strDirection;
-    private int nCount;
 
-    public void move(){}
-    public void scan(){}
-    public void isValidMove(){}
+    public Miner(){
+        this.strDirection = "RIGHT";
+    }
+
+    public Miner(String strDirection)
+    {
+        this.strDirection =strDirection;
+    }
 
     public String getDirection(){
         return this.strDirection;
     }
+
     public void rotate(){
         switch(strDirection){
             case "RIGHT":
@@ -28,8 +33,12 @@ public class Miner {
         }
     }
 
-    public Miner(){
-        this.strDirection = "RIGHT";
+    @Override
+    public Object clone()
+    {
+        Miner mNewMiner = new Miner(this.strDirection);
+
+        return mNewMiner;
     }
 
 
