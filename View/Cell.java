@@ -3,38 +3,42 @@ package View;
 import java.awt.*;
 import javax.swing.*;
 
-public class Cell extends JPanel{
-    private int size = 48;
+import Model.ModelMainMenu;
 
-    public Cell(Point temp, int n){
+public class Cell extends JPanel
+{
+    private JLabel lblTemp;
+
+    public Cell(Point temp, ModelMainMenu modelMainMenu){
         this.setLayout(new GridBagLayout());
-        this.setPreferredSize(new Dimension(size, size));
+        this.setPreferredSize(new Dimension(GUI.CELL_DIMENSION, GUI.CELL_DIMENSION));
         this.setBackground(GUI.TALLOW);
         this.setVisible(true);
-        assignImage(temp, n);
+        lblTemp = new JLabel();
+        this.add(lblTemp);
+        assignImage(temp, modelMainMenu);
     }
 
-    private void assignImage(Point temp, int n){
+    private void assignImage(Point temp, ModelMainMenu modelMainMenu){
+        int nCells = modelMainMenu.getGame().getGameBoard().getMAX_DIMENSION();
         String strTemp = "PlainCell";
-        if((int)temp.getX() == 4 && (int)temp.getY() == 4){
+        if(modelMainMenu.getGame().getGameBoard().getCell(temp).isPit())
+        {
             strTemp = "PlainCellPit"; 
         }
-        else if((int)temp.getX() == 5 && (int)temp.getY() == 5){
-            strTemp = "PlainCellGold";
-        }
-        else if((int)temp.getX() == 6 && (int)temp.getY() == 8){
+        else if(modelMainMenu.getGame().getGameBoard().getCell(temp).isBeacon() != -1){
             strTemp = "PlainCellBeacon";
         }
-        else if((int)temp.getX() == 2){
-            strTemp = "ScannedCell";
+        else if((modelMainMenu.getGame().getGameBoard().getCell(temp).isGold())){
+            strTemp = "PlainCellGold";
         }
-        if(n < 12) strTemp +="19.png";
-        else if (n < 10) strTemp += "9.png";
+        if(nCells < 12) strTemp +="19.png";
+        else if (nCells < 10) strTemp += "9.png";
         else strTemp += "20.png";
 
-        JLabel lblTemp = new JLabel(new ImageIcon("Lib/Cells/"+strTemp));
-        lblTemp.setSize(new Dimension(size, size));
-        this.add(lblTemp);
+        lblTemp.setIcon(new ImageIcon("Lib/Cells/"+strTemp));
+        lblTemp.setSize(new Dimension(GUI.CELL_DIMENSION, GUI.CELL_DIMENSION));
         this.setVisible(true);
     }
+
 }

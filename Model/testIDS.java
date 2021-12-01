@@ -1,6 +1,5 @@
 package Model;
 
-
 import java.awt.*;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
@@ -137,5 +136,10 @@ public class testIDS
     public void setAdjacentNodes(ArrayList<Point> adjacentNodes,testNode currentNode)
     {
         currentNode.setAdjacentNodes(adjacentNodes);
+    }
+
+    public ArrayList<Point> getPathChosen()
+    {
+        return pathChosen;
     }
 }

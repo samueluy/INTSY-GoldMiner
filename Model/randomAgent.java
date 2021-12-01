@@ -1,34 +1,36 @@
 package Model;
 
-
-import java.util.*;
-
-public class randomAgent
+public class RandomAgent extends testIDS
 {
-    public String randomMove()
-    {
-        //0 - Move 1 - Rotate 2 - Scan
-        String thisMove;
-        int moveDirection = 0;
-        Random randoInt = new Random();
-        int randomizer = randoInt.nextInt(3);
-        if(randomizer == 0)
-        {
-            moveDirection = randoInt.nextInt(4);
-            if(moveDirection == 0)
-                thisMove = "U";
-            else if(moveDirection == 1)
-                thisMove = "D";
-            else if(moveDirection == 2)
-                thisMove = "L";
-            else
-                thisMove = "R";
-        }
-        else if(randomizer == 1)
-            thisMove = "Rotate";
-        else
-            thisMove = "Scan";
+    private int nPathCost = 0;
 
-        return thisMove;
+    public RandomAgent(Board gameBoard, int nDepth)
+    {
+        super(gameBoard, nDepth);
+    }
+
+    public int getPathCost()
+    {
+        return nPathCost;
+    }
+
+    public void addToPathCost()
+    {
+        nPathCost++;
+    }
+
+    public String move()
+    {
+        return "M";
+    }
+
+    public String scan()
+    {
+        return "S";
+    }
+
+    public String rotate()
+    {
+        return "R";
     }
 }

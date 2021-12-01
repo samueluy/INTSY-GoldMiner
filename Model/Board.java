@@ -321,7 +321,15 @@ public class Board
         }
     }
 
-    public String getMinerDirection() {return minerDirection;}
+    public String getMinerDirection() 
+    {
+        return arrCells[(int)pMinerCurrCoordinate.getX()][(int)pMinerCurrCoordinate.getY()].getMiner().getDirection();
+    }
+
+    public String getMinerDirectionRandom()
+    {
+        return minerDirection;
+    }
     
     /**
      * Executes the wanted action to the MAIN BOARD
@@ -569,8 +577,13 @@ public class Board
      * Gets the coordinates of the cell where Miner is currently in
      * @return Point: Coordinates of the cell where Miner is currently in
      */
-    private Point getMinerCoordinate ()
+    public Point getMinerCoordinate ()
     {
         return pMinerCurrCoordinate;
+    }
+
+    public Cell getCell(Point coordinates)
+    {
+        return arrCells[(int)coordinates.getX()][(int)coordinates.getY()];
     }
 }

@@ -5,7 +5,7 @@ import javax.swing.plaf.basic.BasicScrollBarUI;
 import java.awt.*;
 
 /**
-* This is an implementation of a JScrollPane with a modern UI
+* This is an implementation of a JScrollPane with a modern UI(Reason why Scroll Bars can be customized)
 * 
 * @apiNote    Reference: https://stackoverflow.com/a/33710320
 * @author     Philipp Danner
@@ -170,19 +170,4 @@ public class ModernScrollPane extends JScrollPane {
             }
         }
     }
-
-    /*public static void main(String[] args) {
-        JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setPreferredSize(new Dimension(400, 400));
-
-        JPanel content = new JPanel();
-        content.setBackground(Color.WHITE);
-        content.setPreferredSize(new Dimension(500, 500));
-        content.add(new JLabel("test"));
-        frame.add(new ModernScrollPane(content));
-
-        frame.pack();
-        frame.setVisible(true);
-    }*/
 }

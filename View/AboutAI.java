@@ -4,11 +4,14 @@ import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.*;
 
-public class AboutAI extends JPanel{
+//represents an AboutAI class (one shown when AboutGoldMiner is clicked on the MainMenu)
+public class AboutAI extends JPanel
+{
     private JPanel pnlTextInstructions;
     private JTextArea texts;
 
-    public AboutAI(String strInstructions){
+    public AboutAI(String strInstructions)
+    {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBorder(new EmptyBorder(new Insets(15,30,50,30)));
         this.setOpaque(false);
@@ -18,7 +21,9 @@ public class AboutAI extends JPanel{
         setUpAboutGoldMiner();
     }
 
-    private void setUpAboutGoldMiner(){
+    //customizes appearance of texts, scroll bar, and text area
+    private void setUpAboutGoldMiner()
+    {
         texts.setFont(new Font(Font.SANS_SERIF, Font.ITALIC, 20));
         texts.setBackground(GUI.SPRING_LEAVES);
         texts.setForeground(Color.white);

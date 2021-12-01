@@ -56,11 +56,11 @@ public class Node implements Cloneable{
                     break;
                 // For SCAN Action
                 case 'S':
-                    arrChild.add(new Node(charAction, boardState.clone(), (Point) pMinerCurrCoordinates.clone(), (Node) this.clone()));
+                    //arrChild.add(new Node(charAction, boardState.clone(), (Point) pMinerCurrCoordinates.clone(), (Node) this.clone()));
                     break;
                 // For ROTATE Action
                 case 'R':
-                    arrChild.add(new Node(charAction, boardState.clone()[pMinerCurrCoordinates.x][pMinerCurrCoordinates.y].getMiner().rotate(), pMinerCurrCoordinates, this));
+                    //arrChild.add(new Node(charAction, boardState.clone()[pMinerCurrCoordinates.x][pMinerCurrCoordinates.y].getMiner().rotate(), pMinerCurrCoordinates, this));
                     break;
 
                 // Incase there is other letter input

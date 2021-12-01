@@ -146,7 +146,7 @@ public class Smart {
 
         nDepthCtr++; // Increment the Depth of A* Search
         nPathCostCtr++; // Increment the Path Cost\
-        
+        System.out.println("++++++++++++++++++++++++++++++++++++   " + nPathCostCtr);
         return cBestAction;
     }
 
@@ -201,7 +201,10 @@ public class Smart {
         hbCurrHeuristicBoard.updateHeuristicBoard(strActionOutput);
     }
 
-    
+    public void setStrActionHistory(char cAction)
+    {
+        this.strActionHistory = this.strActionHistory + cAction;
+    }
 
     
 
